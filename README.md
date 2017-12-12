@@ -12,11 +12,11 @@ Run this command to install [the package](https://www.nuget.org/packages/Matt.Ma
 ## Usage
 
 ```csharp
-var coefficients = new List&lt;bool[]&gt;();
-var solutions = new List&lt;byte[]&gt;();
-&nbsp;
+var coefficients = new List<bool[]>();
+var solutions = new List<byte[]>();
+
 var solver = new GuassianElimination(coefficients, solutions);
-&nbsp;
+
 var solution = solver.Solve(); // This modifies the "coefficients" and "solutions" lists
 if (solution != null)
     // "solution" is a clone of the first rows of "solutions"
@@ -33,19 +33,19 @@ For example, these equations:
 ...can be solved with this code:
 
 ```csharp
-var coefficients = new List&lt;bool[]&gt;(
+var coefficients = new List<bool[]>(
 	new [] {true, true, false},
 	new [] {false, true, true},
 	new [] {true, true, true}
 );
-var solutions = new List&lt;byte[]&gt;(
+var solutions = new List<byte[]>(
 	new [] {0x01, 0x02, 0x03},
 	new [] {0x02, 0x03, 0x04},
 	new [] {0x03, 0x04, 0x05}
 );
-&nbsp;
+
 var solver = new GuassianElimination(coefficients, solutions);
-&nbsp;
+
 var solution = solver.Solve();
 ```
 
