@@ -50,3 +50,15 @@ var solution = solver.Solve();
 ```
 
 Note that solutions are given in [reduced row echelon form](https://en.wikipedia.org/wiki/Row_echelon_form#Reduced_row_echelon_form).
+
+Invoking `.Solve()` mutates the lists passed into the constructor; row operations are performed on them to change them as much as possible into reduced row echelon form.
+
+Therefore, as they become available, new equations can be added to the `coefficients` and `solutions` lists between invocations of `.Solve()`.
+
+## Thread safety
+
+This code is not thread-safe.
+
+## Use cases
+
+This was originally designed for [this rateless forward error-correction project](https://github.com/matthew-a-thomas/cs-distributed-storage). It should be useful for other implementations of fountain codes.
