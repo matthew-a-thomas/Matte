@@ -1,5 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Title>Matt.Math.Linear.Solving</Title>
+    <Description>Tools for solving systems of linear equations.</Description>
+    <Copyright>2017 Matthew Thomas</Copyright>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company />
+    <Authors>Matthew Thomas</Authors>
+    <PackageLicenseUrl>https://github.com/matthew-a-thomas/GaussianElimination/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/matthew-a-thomas/GaussianElimination</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/matthew-a-thomas/GaussianElimination</RepositoryUrl>
   </PropertyGroup>
 </Project>
