@@ -1,4 +1,4 @@
-# GaussianElimination
+# Matt.Math.Linear.Solving
 C# implementation of Gaussian Elimination for systems of XOR equations.
 
 ![Build status](https://switchigan.visualstudio.com/_apis/public/build/definitions/9e65584e-ff3f-4616-b1ab-5227abae1502/7/badge "Build status")
