@@ -1,6 +1,6 @@
-# Matt.Random
-C# random number generators
+# Matt.Bits
+C# tools for manipulating bits.
 
 ## Nuget
 
-[```Matt.Random```](https://www.nuget.org/packages/Matt.Random/)
+[```Matt.Bits```](https://www.nuget.org/packages/Matt.Bits/)
