@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    internal static class BitExtensions
+    public static class BitExtensions
     {
         public static IEnumerable<bool> ToBits(this IEnumerable<byte> bytes)
         {
