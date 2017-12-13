@@ -1,8 +1,8 @@
-﻿namespace Tests.BitManipulation
+﻿namespace Tests
 {
     using System;
     using System.Linq;
-    using Matt.Random.BitManipulation;
+    using Matt.Bits;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]

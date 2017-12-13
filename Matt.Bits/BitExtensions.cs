@@ -1,4 +1,4 @@
-﻿namespace Matt.Random.BitManipulation
+﻿namespace Matt.Bits
 {
     using System.Collections.Generic;
 

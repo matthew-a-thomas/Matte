@@ -9,6 +9,6 @@
     <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Matt.Random\Matt.Random.csproj" />
+    <ProjectReference Include="..\Matt.Bits\Matt.Bits.csproj" />
   </ItemGroup>
 </Project>

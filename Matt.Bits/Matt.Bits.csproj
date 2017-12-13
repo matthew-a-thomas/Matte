@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Title>Matt.Bits</Title>
+    <Description>Tools for manipulating bits.</Description>
+    <Copyright>2017 Matthew Thomas</Copyright>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionSuffix/>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company />
+    <Authors>Matthew Thomas</Authors>
+    <PackageLicenseUrl>https://github.com/matthew-a-thomas/Matt.Bits/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/matthew-a-thomas/Matt.Bits</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Bits</RepositoryUrl>
+  </PropertyGroup>
+</Project>
