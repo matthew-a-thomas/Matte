@@ -4,7 +4,7 @@
     <Title>Matt.Lists</Title>
     <Description>Tools for lists.</Description>
     <Copyright>2017 Matthew Thomas</Copyright>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.2.0</VersionPrefix>
     <VersionSuffix />
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company />
