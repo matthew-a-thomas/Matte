@@ -4,7 +4,7 @@
     <Title>Matt.Bits</Title>
     <Description>Tools for manipulating bits.</Description>
     <Copyright>2017 Matthew Thomas</Copyright>
-    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionPrefix>1.1.0</VersionPrefix>
     <VersionSuffix />
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company />
@@ -13,4 +13,7 @@
     <PackageProjectUrl>https://github.com/matthew-a-thomas/Matt.Bits</PackageProjectUrl>
     <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Bits</RepositoryUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Matt.Lists" Version="1.2.0" />
+  </ItemGroup>
 </Project>

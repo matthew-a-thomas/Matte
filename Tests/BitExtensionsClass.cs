@@ -9,7 +9,7 @@
     public class BitExtensionsClass
     {
         [TestClass]
-        public class GetBitsMethod
+        public class ToBitsMethod
         {
             [TestMethod]
             public void Converts0xF05CTo0b1111_0000_0101_1100()
@@ -39,7 +39,7 @@
         }
         
         [TestClass]
-        public class GetBytesMethod
+        public class ToBytesMethod
         {
             [TestMethod]
             public void MakesFunnyValueFromIncompleteBytes()
