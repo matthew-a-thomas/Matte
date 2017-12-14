@@ -33,8 +33,8 @@
             IList<byte[]> solutions
             )
         {
-            _coefficients = coefficients;
-            _solutions = solutions;
+            _coefficients = coefficients ?? throw new ArgumentNullException(nameof(coefficients));
+            _solutions = solutions ?? throw new ArgumentNullException(nameof(solutions));
         }
 
         #endregion
@@ -48,6 +48,8 @@
         public IReadOnlyList<byte[]> Solve()
         {
             var numRows = _coefficients.Count;
+            if (numRows == 0)
+                return null;
             var numColumns = _coefficients[0].Length;
             var kMax = Math.Min(numRows, numColumns);
 
