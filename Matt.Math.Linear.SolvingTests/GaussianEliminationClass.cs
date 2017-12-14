@@ -11,6 +11,13 @@
         public class SolveMethod
         {
             [TestMethod]
+            public void CanBeCalledWithoutEquations()
+            {
+                var solver = new GaussianElimination(new List<bool[]>(), new List<byte[]>());
+                solver.Solve();
+            }
+
+            [TestMethod]
             public void DoesNotSolveUnsolvableSystem()
             {
                 var coefficients = new List<bool[]>
