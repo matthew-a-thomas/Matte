@@ -4,9 +4,8 @@
     <Title>Matt.Math.Linear.Solving</Title>
     <Description>Tools for solving systems of linear equations.</Description>
     <Copyright>2017 Matthew Thomas</Copyright>
-    <VersionPrefix>1.0.3</VersionPrefix>
+    <VersionPrefix>1.0.4</VersionPrefix>
     <VersionSuffix />
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company />
     <Authors>Matthew Thomas</Authors>
     <PackageLicenseUrl>https://github.com/matthew-a-thomas/Matt.Math.Linear.Solving/blob/master/LICENSE</PackageLicenseUrl>
