@@ -3,6 +3,9 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Extension methods for <see cref="IReadOnlyList{T}"/> instances.
+    /// </summary>
     public static class ReadOnlyListExtensions
     {
         /// <summary>

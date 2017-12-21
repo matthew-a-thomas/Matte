@@ -2,11 +2,18 @@
 {
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Extension methods for <see cref="IEnumerable{T}"/> instances.
+    /// </summary>
     public static class EnumerableExtensions
     {
         /// <summary>
-        /// Puts the <paramref name="source"/> sequence into chunks of size <paramref name="count"/>.
+        /// Puts the <paramref name="source"/> sequence into chunks up to size <paramref name="count"/>.
         /// </summary>
+        /// <remarks>
+        /// The last chunk might not be of size <paramref name="count"/> if the number of items in the
+        /// <paramref name="source"/> doesn't evenly divide <paramref name="count"/>.
+        /// </remarks>
         public static IEnumerable<T[]> Buffer<T>(
             this IEnumerable<T> source,
             int count)
@@ -20,7 +27,7 @@
                 yield return buffer.ToArray();
                 buffer.Clear();
             }
-            if (buffer.Count == count)
+            if (buffer.Count > 0)
                 yield return buffer.ToArray();
         }
     }

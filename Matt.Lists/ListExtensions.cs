@@ -3,6 +3,9 @@
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Extension methods for lists.
+    /// </summary>
     public static class ListExtensions
     {
         /// <summary>
