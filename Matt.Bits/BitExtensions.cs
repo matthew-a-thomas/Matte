@@ -3,8 +3,14 @@
     using System.Collections.Generic;
     using Lists;
 
+    /// <summary>
+    /// Various extension methods for dealing with individual bits.
+    /// </summary>
     public static class BitExtensions
     {
+        /// <summary>
+        /// Converts this enumerable of bytes into an enumerable of bits.
+        /// </summary>
         public static IEnumerable<bool> ToBits(this IEnumerable<byte> bytes)
         {
             foreach (var @byte in bytes)
@@ -14,6 +20,9 @@
             }
         }
         
+        /// <summary>
+        /// Converts this enumerable of bits into an enumerable of bytes.
+        /// </summary>
         public static IEnumerable<byte> ToBytes(this IEnumerable<bool> bits)
         {
             byte shift = 0;
