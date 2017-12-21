@@ -9,6 +9,32 @@
     public class BitExtensionsClass
     {
         [TestClass]
+        public class PackMethod
+        {
+            [TestMethod]
+            public void PutsEightBytesIntoOneLong()
+            {
+                var packed = Enumerable.Repeat(
+                        (byte) 0,
+                        8)
+                    .Pack()
+                    .ToList();
+                Assert.AreEqual(1, packed.Count);
+            }
+
+            [TestMethod]
+            public void PutsNineBytesIntoTwoLongs()
+            {
+                var packed = Enumerable.Repeat(
+                        (byte) 0,
+                        9)
+                    .Pack()
+                    .ToList();
+                Assert.AreEqual(2, packed.Count);
+            }
+        }
+
+        [TestClass]
         public class ToBitsMethod
         {
             [TestMethod]
@@ -89,6 +115,26 @@
                 Assert.IsTrue(
                     bytes.SequenceEqual(new byte[] { 0xFF }),
                     BitConverter.ToString(bytes.ToArray()));
+            }
+        }
+
+        [TestClass]
+        public class UnpackMethod
+        {
+            [TestMethod]
+            public void TurnsOneLongIntoEightBytes()
+            {
+                var unpacked = new long[] {0}.Unpack()
+                    .ToList();
+                Assert.AreEqual(8, unpacked.Count);
+            }
+
+            [TestMethod]
+            public void TurnsTwoLongsIntoSixteenBytes()
+            {
+                var unpacked = new long[] {0, 1}.Unpack()
+                    .ToList();
+                Assert.AreEqual(16, unpacked.Count);
             }
         }
     }

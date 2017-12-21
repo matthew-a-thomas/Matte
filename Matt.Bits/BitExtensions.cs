@@ -1,6 +1,8 @@
 ﻿namespace Matt.Bits
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Lists;
 
     /// <summary>
@@ -8,6 +10,30 @@
     /// </summary>
     public static class BitExtensions
     {
+        /// <summary>
+        /// Packs the given enumerable of bytes into the minimum number of <see cref="long"/>s required to store them.
+        /// </summary>
+        /// <remarks>
+        /// Bitwise operations on <see cref="long"/> tend to be significantly faster than on the equivalent number of
+        /// <see cref="byte"/>s.
+        /// </remarks>
+        public static IEnumerable<long> Pack(
+            this IEnumerable<byte> bytes) =>
+            bytes
+                .Buffer(sizeof(long))
+                .Select(
+                    array =>
+                    {
+                        if (array.Length == sizeof(long))
+                            return array;
+                        var newArray = new byte[sizeof(long)];
+                        array.CopyTo(
+                            newArray,
+                            0);
+                        return newArray;
+                    })
+                .Select(array => BitConverter.ToInt64(array, 0));
+
         /// <summary>
         /// Converts this enumerable of bytes into an enumerable of bits.
         /// </summary>
@@ -48,6 +74,16 @@
                 accumulate <<= 1;
             yield return accumulate;
         }
+
+        /// <summary>
+        /// Unpacks this enumerable of <see cref="long"/>s into equivalent bytes.
+        /// </summary>
+        /// <remarks>
+        /// Note there will be a multiple of 8 bytes returned. Use <see cref="Enumerable.Take{TSource}"/> to trim it
+        /// down to size if needed.
+        /// </remarks>
+        public static IEnumerable<byte> Unpack(this IEnumerable<long> from) =>
+            from.SelectMany(BitConverter.GetBytes);
         
         /// <summary>
         /// Modifies the given <see cref="IList{T}"/> by XORing this list into it.
