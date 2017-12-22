@@ -6,4 +6,4 @@ Various interface definitions.
 
 ## NuGet
 
-[`Matt.Interfaces`](https://www.nuget.org/packages/Matt.Bits/)
+[`Matt.Interfaces`](https://www.nuget.org/packages/Matt.Interfaces/)
