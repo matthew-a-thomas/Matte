@@ -1,0 +1,21 @@
+[submodule "externals/Matt.Bits"]
+	path = externals/Matt.Bits
+	url = ../Matt.Bits.git
+[submodule "externals/Matt.Encoding.Fountain"]
+	path = externals/Matt.Encoding.Fountain
+	url = ../Matt.Encoding.Fountain.git
+[submodule "externals/Matt.Interfaces"]
+	path = externals/Matt.Interfaces
+	url = ../Matt.Interfaces.git
+[submodule "externals/Matt.Lists"]
+	path = externals/Matt.Lists
+	url = ../Matt.Lists.git
+[submodule "externals/Matt.Math.Linear.Solving"]
+	path = externals/Matt.Math.Linear.Solving
+	url = ../Matt.Math.Linear.Solving.git
+[submodule "externals/Matt.Math.Stats.Wilson"]
+	path = externals/Matt.Math.Stats.Wilson
+	url = ../Matt.Math.Stats.Wilson.git
+[submodule "externals/Matt.Random"]
+	path = externals/Matt.Random
+	url = ../Matt.Random.git
