@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Random", "externals\Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Random.Tests", "externals\Matt.Random\Matt.Random.Tests\Matt.Random.Tests.csproj", "{BE152BAC-5596-45D8-9B3F-9C89EB30021C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Tests", "Matte.Tests\Matte.Tests.csproj", "{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{BE152BAC-5596-45D8-9B3F-9C89EB30021C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE152BAC-5596-45D8-9B3F-9C89EB30021C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE152BAC-5596-45D8-9B3F-9C89EB30021C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
