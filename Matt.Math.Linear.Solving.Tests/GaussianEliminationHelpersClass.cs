@@ -1,4 +1,4 @@
-﻿namespace Matt.Math.Linear.SolvingTests
+﻿namespace Matt.Math.Linear.Solving.Tests
 {
     using System;
     using System.Collections.Generic;

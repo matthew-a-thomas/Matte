@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Math.Linear.Solving", "Matt.Math.Linear.Solving\Matt.Math.Linear.Solving.csproj", "{A0AA833C-CFC3-4F02-9261-1C562707B34D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Math.Linear.SolvingTests", "Matt.Math.Linear.SolvingTests\Matt.Math.Linear.SolvingTests.csproj", "{0ED577EE-A9EC-443E-889E-F703CA24CEE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Math.Linear.Solving.Tests", "Matt.Math.Linear.Solving.Tests\Matt.Math.Linear.Solving.Tests.csproj", "{0ED577EE-A9EC-443E-889E-F703CA24CEE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
