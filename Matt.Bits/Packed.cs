@@ -20,6 +20,11 @@
     public sealed class Packed : ICloneable<Packed>, ISupportsXor<Packed>
     {
         /// <summary>
+        /// The internal array of <see cref="long"/>s.
+        /// </summary>
+        public IReadOnlyList<long> PackedBytes => _packedBytes;
+        
+        /// <summary>
         /// The data stored in a manner that allows fast XOR operations.
         /// </summary>
         private readonly long[] _packedBytes;
