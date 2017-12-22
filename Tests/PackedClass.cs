@@ -38,6 +38,14 @@
         }
 
         [TestMethod]
+        public void PacksBitsCorrectly()
+        {
+            var packed = Packed.Create(new[] {true, false, true});
+            Assert.AreEqual(1, packed.PackedBytes.Count);
+            Assert.AreEqual(5, packed.PackedBytes[0]);
+        }
+
+        [TestMethod]
         public void XorsCorrectly()
         {
             var packed1 = Packed.Create(new byte[] {0x00, 0x01, 0x02, 0x03});

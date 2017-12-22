@@ -45,6 +45,19 @@
         public Packed Clone() => new Packed(_packedBytes.Clone() as long[]);
 
         /// <summary>
+        /// Creates a new <see cref="Packed"/> from the given <paramref name="bits"/>.
+        /// </summary>
+        /// <remarks>
+        /// This method ensures that the correct number of bits are prepended before they are packed.
+        /// </remarks>
+        public static Packed Create(IReadOnlyCollection<bool> bits) =>
+            Create(
+                bits
+                    .Pad()
+                    .ToBytes()
+            );
+        
+        /// <summary>
         /// Creates a new <see cref="Packed"/> from the given <paramref name="data"/>.
         /// </summary>
         public static Packed Create(IEnumerable<byte> data) =>

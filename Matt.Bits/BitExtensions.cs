@@ -35,6 +35,18 @@
                 .Select(array => BitConverter.ToInt64(array, 0));
 
         /// <summary>
+        /// Prepends enough bits to these <paramref name="bits"/> so that their
+        /// <see cref="IReadOnlyCollection{T}.Count"/> is an even multiple of eight. 
+        /// </summary>
+        public static IEnumerable<bool> Pad(
+            this IReadOnlyCollection<bool> bits) =>
+            Enumerable.Repeat(
+                    element: default(bool),
+                    count: ((bits.Count - 1) / 8 + 1) * 8 - bits.Count
+                )
+                .Concat(bits);
+        
+        /// <summary>
         /// Converts this enumerable of bytes into an enumerable of bits.
         /// </summary>
         public static IEnumerable<bool> ToBits(this IEnumerable<byte> bytes)
