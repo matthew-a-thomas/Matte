@@ -25,8 +25,8 @@
         {
             var bytes = new byte[] {0x01, 0x02, 0xF3, 0xE4};
             var packed = Packed.Create(bytes);
-            var newBytes = packed.GetBytes();
-            Assert.IsTrue(newBytes.SequenceEqual(bytes.Concat(Enumerable.Repeat((byte)0, 4))));
+            var newBytes = packed.GetBytes().Take(4);
+            Assert.IsTrue(newBytes.SequenceEqual(bytes));
         }
 
         [TestMethod]
