@@ -12,6 +12,15 @@
         public class PackMethod
         {
             [TestMethod]
+            public void Puts0xFF_0x55Into0x55FF()
+            {
+                var packed = new byte[] {0xFF, 0x55}.Pack()
+                    .ToList();
+                Assert.AreEqual(1, packed.Count);
+                Assert.AreEqual(0x55FF, packed[0]);
+            }
+
+            [TestMethod]
             public void PutsEightBytesIntoOneLong()
             {
                 var packed = Enumerable.Repeat(
