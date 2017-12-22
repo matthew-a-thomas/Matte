@@ -1,8 +1,8 @@
-﻿namespace Tests
+﻿namespace Matt.Bits.Tests
 {
     using System;
     using System.Linq;
-    using Matt.Bits;
+    using Bits;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
