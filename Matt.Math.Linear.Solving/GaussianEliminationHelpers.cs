@@ -1,8 +1,8 @@
 ﻿namespace Matt.Math.Linear.Solving
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
+    using Bits;
 
     /// <summary>
     /// Solves a system of equations
@@ -15,20 +15,19 @@
         /// if the system of equations is solvable.
         /// </summary>
         /// <remarks>
-        /// The given <paramref name="coefficients"/> are modified because we actually put them into reduced row echelon
+        /// The given <paramref name="packedCoefficients"/> are modified because we actually put them into reduced row echelon
         /// form in order to find the steps necessary to do so.
         /// 
-        /// So make sure that any data associated with the given <paramref name="coefficients"/> is mutated accordingly.
+        /// So make sure that any data associated with the given <paramref name="packedCoefficients"/> is mutated accordingly.
         /// </remarks>
-        public static IEnumerable<Step> Solve(IList<BitArray> coefficients)
+        public static IEnumerable<Step> Solve(IList<Packed> packedCoefficients, int numCoefficients)
         {
-            if (coefficients == null)
+            if (packedCoefficients == null || numCoefficients <= 0)
                 yield break;
-            var numRows = coefficients.Count;
+            var numRows = packedCoefficients.Count;
             if (numRows == 0)
                 yield break;
-            var numColumns = coefficients[0].Length;
-            var kMax = Math.Min(numRows, numColumns);
+            var kMax = Math.Min(numRows, numCoefficients);
 
             // Put matrix into row echelon form
             for (var k = 0; k < kMax; k++) // O(n^2)
@@ -37,53 +36,53 @@
                 var iMax = 0;
                 for (var i = k; i < numRows; i++) // O(n)
                 {
-                    if (!coefficients[i][k])
+                    if (!packedCoefficients[i].GetBit(k))
                         continue;
                     iMax = i;
                     break;
                 }
-                if (!coefficients[iMax][k])
+                if (!packedCoefficients[iMax].GetBit(k))
                     yield break;
                 // Swap rows k and i_max
                 if (iMax != k)
                 {
-                    yield return SwapRows(coefficients, iMax, k);
+                    yield return SwapRows(packedCoefficients, iMax, k);
                 }
                 // XOR pivot with all rows below the pivot
                 for (var i = k + 1; i < numRows; i++) // O(n)
                 {
-                    if (!coefficients[i][k])
+                    if (!packedCoefficients[i].GetBit(k))
                         continue;
-                    yield return XorRows(coefficients, k, i); // We can just XOR since we're dealing with Galois Fields
+                    yield return XorRows(packedCoefficients, k, i); // We can just XOR since we're dealing with Galois Fields
                 }
             }
 
             // Put the matrix into reduced row echelon form using back substitution
             for (var k = kMax - 1; k > 0; k--) // O(n^2)
             {
-                if (!coefficients[k][k])
+                if (!packedCoefficients[k].GetBit(k))
                     yield break;
                 // See which other rows need to be XOR'd with this one
                 for (var i = k - 1; i >= 0; i--) // O(n)
                 {
-                    if (!coefficients[i][k])
+                    if (!packedCoefficients[i].GetBit(k))
                         continue;
-                    yield return XorRows(coefficients, k, i);
+                    yield return XorRows(packedCoefficients, k, i);
                 }
             }
 
             // Make sure the top part of the coefficients matrix is the identity matrix and that the bottom part is only zeros
             for (var row = 0; row < numRows; row++) // O(n^2)
             {
-                for (var column = 0; column < numColumns; column++) // O(n)
+                for (var column = 0; column < numCoefficients; column++) // O(n)
                 {
-                    if ((row == column) ^ coefficients[row][column]) // There should be a coefficient and there's not, or there shouldn't be and there is
+                    if ((row == column) ^ packedCoefficients[row].GetBit(column)) // There should be a coefficient and there's not, or there shouldn't be and there is
                         yield break;
                 }
             }
 
             // Make sure there are at least as many rows as there are columns
-            if (numRows < numColumns)
+            if (numRows < numCoefficients)
                 yield break;
             
             // If we made it this far, then things have been solved
@@ -100,7 +99,7 @@
         /// Swaps the coefficients and solutions between the two given rows
         /// </summary>
         private static Step SwapRows(
-            IList<BitArray> list,
+            IList<Packed> list,
             int fromRow,
             int toRow)
         {
@@ -108,7 +107,7 @@
             list[fromRow] = list[toRow];
             list[toRow] = temp;
             return new Step(
-                @from: fromRow,
+                from: fromRow,
                 operation: Operation.Swap,
                 to: toRow);
         }
@@ -117,13 +116,13 @@
         /// XOR's the row at <paramref name="fromRow"/> into the row at <paramref name="toRow"/>, for both the coefficients and the solutions
         /// </summary>
         private static Step XorRows(
-            IList<BitArray> list,
+            IList<Packed> list,
             int fromRow,
             int toRow)
         {
             list[toRow].Xor(list[fromRow]);
             return new Step(
-                @from: fromRow,
+                from: fromRow,
                 operation: Operation.Xor,
                 to: toRow);
         }

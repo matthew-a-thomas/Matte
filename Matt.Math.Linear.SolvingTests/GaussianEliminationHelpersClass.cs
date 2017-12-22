@@ -1,9 +1,9 @@
 ﻿namespace Matt.Math.Linear.SolvingTests
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using Bits;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Solving;
 
@@ -13,21 +13,42 @@
         [TestClass]
         public class SolveMethod
         {
+            private static void AssertIsSolved(
+                IReadOnlyList<Packed> list,
+                int width)
+            {
+                for (var i = 0; i < width; ++i)
+                {
+                    for (var j = 0; j < width; ++j)
+                    {
+                        Assert.AreEqual(i == j, list[i].GetBit(j));
+                    }
+                }
+            }
+
+            private static IEnumerable<bool> Pad(
+                IReadOnlyCollection<bool> bits) =>
+                Enumerable.Repeat(
+                        element: default(bool),
+                        count: ((bits.Count - 1) / 8 + 1) * 8 - bits.Count
+                    )
+                    .Concat(bits);
+
             [TestMethod]
             public void CanBeCalledWithoutEquations()
             {
                 // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-                GaussianEliminationHelpers.Solve(new List<BitArray>()).ToList();
+                GaussianEliminationHelpers.Solve(new List<Packed>(), 1).ToList();
             }
 
             [TestMethod]
             public void DoesNotSolveUnsolvableSystem()
             {
-                var coefficients = new List<BitArray>
+                var coefficients = new List<Packed>
                 {
-                    new BitArray(new[] { true, false, false })
+                    Packed.Create(Pad(new[] { true, false, false }).ToBytes())
                 };
-                var solution = GaussianEliminationHelpers.Solve(coefficients).ToList();
+                var solution = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
 
                 if (solution.Count > 0)
                     Assert.IsTrue(solution[solution.Count].Operation != Operation.Complete);
@@ -36,25 +57,23 @@
             [TestMethod]
             public void ProducesStepsWhichResultInIdenticalChangesAndASolution()
             {
-                var coefficients = new List<BitArray>
+                var coefficients = new List<Packed>
                 {
-                    new BitArray(new [] { true, true, true }),
-                    new BitArray(new [] { false, true, true }),
-                    new BitArray(new [] { false, true, false })
+                    Packed.Create(Pad(new [] { true, true, true }).ToBytes()),
+                    Packed.Create(Pad(new [] { false, true, true }).ToBytes()),
+                    Packed.Create(Pad(new [] { false, true, false }).ToBytes())
                 };
-                var copy = coefficients.Select(x => x.Clone() as BitArray).ToList();
+                var copy = coefficients.Select(x => x.Clone()).ToList();
                 
-                var steps = GaussianEliminationHelpers.Solve(coefficients).ToList();
+                var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 
                 // Assert that it has been solved
                 Assert.IsTrue(steps.Count > 0);
                 Assert.AreEqual(Operation.Complete, steps[steps.Count - 1].Operation);
-                Assert.IsTrue(coefficients[0][0]); Assert.IsFalse(coefficients[0][1]); Assert.IsFalse(coefficients[0][2]);
-                Assert.IsFalse(coefficients[1][0]); Assert.IsTrue(coefficients[1][1]); Assert.IsFalse(coefficients[1][2]);
-                Assert.IsFalse(coefficients[2][0]); Assert.IsFalse(coefficients[2][1]); Assert.IsTrue(coefficients[2][2]);
+                AssertIsSolved(coefficients, 3);
                 
                 // Perform the steps on the copy
-                var mappedOperations = new Dictionary<Operation, Action<int, int, IList<BitArray>>>
+                var mappedOperations = new Dictionary<Operation, Action<int, int, IList<Packed>>>
                 {
                     {
                         Operation.Swap,
@@ -78,80 +97,70 @@
                 }
                 
                 // Assert that the copy has been solved
-                Assert.IsTrue(copy[0][0]); Assert.IsFalse(copy[0][1]); Assert.IsFalse(copy[0][2]);
-                Assert.IsFalse(copy[1][0]); Assert.IsTrue(copy[1][1]); Assert.IsFalse(copy[1][2]);
-                Assert.IsFalse(copy[2][0]); Assert.IsFalse(copy[2][1]); Assert.IsTrue(copy[2][2]);
+                AssertIsSolved(copy, 3);
             }
 
             [TestMethod]
             public void SolvesAlreadySolvedSystem()
             {
-                var coefficients = new List<BitArray>
+                var coefficients = new List<Packed>
                 {
-                    new BitArray(new[] { true, false, false }),
-                    new BitArray(new[] { false, true, false }),
-                    new BitArray(new[] { false, false, true })
+                    Packed.Create(Pad(new[] { true, false, false }).ToBytes()),
+                    Packed.Create(Pad(new[] { false, true, false }).ToBytes()),
+                    Packed.Create(Pad(new[] { false, false, true }).ToBytes())
                 };
-                var steps = GaussianEliminationHelpers.Solve(coefficients).ToList();
+                var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);
                 Assert.AreEqual(Operation.Complete, steps[steps.Count - 1].Operation);
-                Assert.IsTrue(coefficients[0][0]); Assert.IsFalse(coefficients[0][1]); Assert.IsFalse(coefficients[0][2]);
-                Assert.IsFalse(coefficients[1][0]); Assert.IsTrue(coefficients[1][1]); Assert.IsFalse(coefficients[1][2]);
-                Assert.IsFalse(coefficients[2][0]); Assert.IsFalse(coefficients[2][1]); Assert.IsTrue(coefficients[2][2]);
+                AssertIsSolved(coefficients, 3);
             }
 
             [TestMethod]
             public void SolvesEasilySolvableSystem()
             {
-                var coefficients = new List<BitArray>
+                var coefficients = new List<Packed>
                 {
-                    new BitArray(new[] { false, false, true }),
-                    new BitArray(new[] { false, true, false }),
-                    new BitArray(new[] { true, false, false })
+                    Packed.Create(Pad(new[] { false, false, true }).ToBytes()),
+                    Packed.Create(Pad(new[] { false, true, false }).ToBytes()),
+                    Packed.Create(Pad(new[] { true, false, false }).ToBytes())
                 };
-                var steps = GaussianEliminationHelpers.Solve(coefficients).ToList();
+                var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);
                 Assert.AreEqual(Operation.Complete, steps[steps.Count - 1].Operation);
-                Assert.IsTrue(coefficients[0][0]); Assert.IsFalse(coefficients[0][1]); Assert.IsFalse(coefficients[0][2]);
-                Assert.IsFalse(coefficients[1][0]); Assert.IsTrue(coefficients[1][1]); Assert.IsFalse(coefficients[1][2]);
-                Assert.IsFalse(coefficients[2][0]); Assert.IsFalse(coefficients[2][1]); Assert.IsTrue(coefficients[2][2]);
+                AssertIsSolved(coefficients, 3);
             }
 
             [TestMethod]
             public void SolvesComplicatedSystem()
             {
-                var coefficients = new List<BitArray>
+                var coefficients = new List<Packed>
                 {
-                    new BitArray(new[] {true, false, true}),
-                    new BitArray(new[] {true, true, true}),
-                    new BitArray(new[] {false, false, true})
+                    Packed.Create(Pad(new[] {true, false, true}).ToBytes()),
+                    Packed.Create(Pad(new[] {true, true, true}).ToBytes()),
+                    Packed.Create(Pad(new[] {false, false, true}).ToBytes())
                 };
-                var steps = GaussianEliminationHelpers.Solve(coefficients).ToList();
+                var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);
                 Assert.AreEqual(Operation.Complete, steps[steps.Count - 1].Operation);
-                Assert.IsTrue(coefficients[0][0]); Assert.IsFalse(coefficients[0][1]); Assert.IsFalse(coefficients[0][2]);
-                Assert.IsFalse(coefficients[1][0]); Assert.IsTrue(coefficients[1][1]); Assert.IsFalse(coefficients[1][2]);
-                Assert.IsFalse(coefficients[2][0]); Assert.IsFalse(coefficients[2][1]); Assert.IsTrue(coefficients[2][2]);
+                AssertIsSolved(coefficients, 3);
             }
 
             [TestMethod]
             public void SolvesOverlySolvedSystem()
             {
-                var coefficients = new List<BitArray>
+                var coefficients = new List<Packed>
                 {
-                    new BitArray(new[] { false, false, true }),
-                    new BitArray(new[] { false, true, false }),
-                    new BitArray(new[] { true, false, false }),
-                    new BitArray(new[] { false, false, true }),
-                    new BitArray(new[] { false, true, false }),
-                    new BitArray(new[] { true, false, false })
+                    Packed.Create(Pad(new[] { false, false, true }).ToBytes()),
+                    Packed.Create(Pad(new[] { false, true, false }).ToBytes()),
+                    Packed.Create(Pad(new[] { true, false, false }).ToBytes()),
+                    Packed.Create(Pad(new[] { false, false, true }).ToBytes()),
+                    Packed.Create(Pad(new[] { false, true, false }).ToBytes()),
+                    Packed.Create(Pad(new[] { true, false, false }).ToBytes())
                 };
-                var steps = GaussianEliminationHelpers.Solve(coefficients).ToList();
+                var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);
                 Assert.AreEqual(Operation.Complete, steps[steps.Count - 1].Operation);
-                Assert.IsTrue(coefficients[0][0]); Assert.IsFalse(coefficients[0][1]); Assert.IsFalse(coefficients[0][2]);
-                Assert.IsFalse(coefficients[1][0]); Assert.IsTrue(coefficients[1][1]); Assert.IsFalse(coefficients[1][2]);
-                Assert.IsFalse(coefficients[2][0]); Assert.IsFalse(coefficients[2][1]); Assert.IsTrue(coefficients[2][2]);
+                AssertIsSolved(coefficients, 3);
             }
         }
     }
