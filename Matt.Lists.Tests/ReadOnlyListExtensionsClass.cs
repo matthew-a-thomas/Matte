@@ -1,9 +1,8 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Tests
+namespace Matt.Lists.Tests
 {
     using System.Linq;
-    using Matt.Lists;
+    using Lists;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ReadOnlyListExtensionsClass
