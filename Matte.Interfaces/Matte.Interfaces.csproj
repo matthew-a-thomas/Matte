@@ -13,4 +13,7 @@
     <PackageProjectUrl>https://github.com/matthew-a-thomas/Matt.Interfaces</PackageProjectUrl>
     <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Interfaces</RepositoryUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="2.0.1" />
+  </ItemGroup>
 </Project>
