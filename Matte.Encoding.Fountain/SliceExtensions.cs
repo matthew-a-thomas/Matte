@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Bits;
 
     /// <summary>
     /// Extension methods dealing with <see cref="Slice"/>s.
@@ -11,14 +12,18 @@
         /// <summary>
         /// Gets the coefficients contained within this <see cref="Slice"/>.
         /// </summary>
-        public static IReadOnlyCollection<bool> GetCoefficients(
-            this Slice slice) => throw new NotImplementedException();
+        public static IEnumerable<bool> GetCoefficients(this Slice slice) =>
+            slice
+                .PackedCoefficients
+                .GetBits(slice.NumCoefficients);
 
         /// <summary>
         /// Gets the data contained within this <see cref="Slice"/>.
         /// </summary>
-        public static IReadOnlyCollection<byte> GetData(
-            this Slice slice) => throw new NotImplementedException();
+        public static IEnumerable<byte> GetData(this Slice slice) =>
+            slice
+                .PackedData
+                .GetBytes(slice.NumData);
         
         /// <summary>
         /// Splits the given <paramref name="data"/> up into as many <see cref="Slice"/>s as needed to have slices of

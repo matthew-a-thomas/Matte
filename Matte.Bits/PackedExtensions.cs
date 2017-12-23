@@ -9,6 +9,16 @@
     public static class PackedExtensions
     {
         /// <summary>
+        /// Gets the given number of bits from this <see cref="Packed"/>.
+        /// </summary>
+        /// <remarks>
+        /// This method takes into account the way that booleans are represented in a <see cref="Packed"/>.
+        /// </remarks>
+        public static IEnumerable<bool> GetBits(
+            this Packed packed,
+            int numBits) => throw new NotImplementedException();
+        
+        /// <summary>
         /// Returns the bit at the given <paramref name="index"/> from the end of this <see cref="Packed"/>.
         /// </summary>
         public static bool GetLeastSignificantBit(

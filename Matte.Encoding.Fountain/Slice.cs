@@ -17,12 +17,12 @@
         /// <summary>
         /// The number of booleans that are in <see cref="PackedCoefficients"/>.
         /// </summary>
-        private readonly int _numCoefficients;
+        internal int NumCoefficients { get; }
 
         /// <summary>
         /// The number of bytes that are in <see cref="PackedData"/>.
         /// </summary>
-        private readonly int _numData;
+        internal int NumData { get; }
 
         /// <summary>
         /// The coefficients in a form that allows fast bitwise XOR operations.
@@ -51,8 +51,8 @@
             Packed packedCoefficients,
             Packed packedData)
         {
-            _numCoefficients = numCoefficients;
-            _numData = numData;
+            NumCoefficients = numCoefficients;
+            NumData = numData;
             PackedCoefficients = packedCoefficients;
             PackedData = packedData;
         }
@@ -62,8 +62,8 @@
         /// </summary>
         public Slice Clone() =>
             new Slice(
-                numCoefficients: _numCoefficients,
-                numData: _numData,
+                numCoefficients: NumCoefficients,
+                numData: NumData,
                 packedCoefficients: PackedCoefficients.Clone(),
                 packedData: PackedData.Clone()
             );
