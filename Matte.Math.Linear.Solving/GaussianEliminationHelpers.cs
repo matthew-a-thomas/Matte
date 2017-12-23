@@ -36,12 +36,12 @@
                 var iMax = 0;
                 for (var i = k; i < numRows; i++) // O(n)
                 {
-                    if (!packedCoefficients[i].GetLeastSignificantBit(k))
+                    if (!packedCoefficients[i].GetBit(numCoefficients, k))
                         continue;
                     iMax = i;
                     break;
                 }
-                if (!packedCoefficients[iMax].GetLeastSignificantBit(k))
+                if (!packedCoefficients[iMax].GetBit(numCoefficients, k))
                     yield break;
                 // Swap rows k and i_max
                 if (iMax != k)
@@ -51,7 +51,7 @@
                 // XOR pivot with all rows below the pivot
                 for (var i = k + 1; i < numRows; i++) // O(n)
                 {
-                    if (!packedCoefficients[i].GetLeastSignificantBit(k))
+                    if (!packedCoefficients[i].GetBit(numCoefficients, k))
                         continue;
                     yield return XorRows(packedCoefficients, k, i); // We can just XOR since we're dealing with Galois Fields
                 }
@@ -60,12 +60,12 @@
             // Put the matrix into reduced row echelon form using back substitution
             for (var k = kMax - 1; k > 0; k--) // O(n^2)
             {
-                if (!packedCoefficients[k].GetLeastSignificantBit(k))
+                if (!packedCoefficients[k].GetBit(numCoefficients, k))
                     yield break;
                 // See which other rows need to be XOR'd with this one
                 for (var i = k - 1; i >= 0; i--) // O(n)
                 {
-                    if (!packedCoefficients[i].GetLeastSignificantBit(k))
+                    if (!packedCoefficients[i].GetBit(numCoefficients, k))
                         continue;
                     yield return XorRows(packedCoefficients, k, i);
                 }
@@ -76,7 +76,7 @@
             {
                 for (var column = 0; column < numCoefficients; column++) // O(n)
                 {
-                    if ((row == column) ^ packedCoefficients[row].GetLeastSignificantBit(column)) // There should be a coefficient and there's not, or there shouldn't be and there is
+                    if ((row == column) ^ packedCoefficients[row].GetBit(numCoefficients, column)) // There should be a coefficient and there's not, or there shouldn't be and there is
                         yield break;
                 }
             }
