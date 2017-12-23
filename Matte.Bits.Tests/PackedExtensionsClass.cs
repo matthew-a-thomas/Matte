@@ -1,10 +1,31 @@
 ﻿namespace Matte.Bits.Tests
 {
+    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class PackedExtensionsClass
     {
+        [TestClass]
+        public class GetBitsMethod
+        {
+            [TestMethod]
+            public void GetsSameBitsAsGivenToCreateMethod()
+            {
+                var bits = new []
+                {
+                    false,
+                    true,
+                    true,
+                    false,
+                    true
+                };
+                var packed = PackedHelpers.CreateFrom(bits);
+                var newBits = packed.GetBits(bits.Length);
+                Assert.IsTrue(bits.SequenceEqual(newBits));
+            }
+        }
+
         [TestClass]
         public class GetLeastSignificantBitMethod
         {

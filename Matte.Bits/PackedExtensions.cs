@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Extension methods for <see cref="Packed"/>.
@@ -16,8 +17,14 @@
         /// </remarks>
         public static IEnumerable<bool> GetBits(
             this Packed packed,
-            int numBits) => throw new NotImplementedException();
-        
+            int numBits) =>
+            Enumerable
+                .Range(
+                    0,
+                    numBits)
+                .Select(i => numBits - i - 1)
+                .Select(packed.GetLeastSignificantBit);
+
         /// <summary>
         /// Returns the bit at the given <paramref name="index"/> from the end of this <see cref="Packed"/>.
         /// </summary>
