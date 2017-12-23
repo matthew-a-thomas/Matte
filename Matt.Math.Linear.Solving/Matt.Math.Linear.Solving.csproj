@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Title>Matt.Math.Linear.Solving</Title>
+    <Description>Tools for solving systems of linear equations.</Description>
+    <Copyright>2017 Matthew Thomas</Copyright>
+    <VersionPrefix>3.0.2</VersionPrefix>
+    <VersionSuffix />
+    <Company />
+    <Authors>Matthew Thomas</Authors>
+    <PackageLicenseUrl>https://github.com/matthew-a-thomas/Matt.Math.Linear.Solving/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/matthew-a-thomas/Matt.Math.Linear.Solving</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Math.Linear.Solving</RepositoryUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Matt.Bits" Version="1.6.0" />
+  </ItemGroup>
+</Project>
