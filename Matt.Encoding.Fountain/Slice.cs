@@ -17,7 +17,7 @@
     public sealed class Slice : ICloneable<Slice>, ISupportsXor<Slice>
     {
         /// <summary>
-        /// The number of booleans that are in <see cref="_packedCoefficients"/>.
+        /// The number of booleans that are in <see cref="PackedCoefficients"/>.
         /// </summary>
         private readonly int _numCoefficients;
 
@@ -29,7 +29,7 @@
         /// <summary>
         /// The coefficients in a form that allows fast bitwise XOR operations.
         /// </summary>
-        private readonly Packed _packedCoefficients;
+        internal Packed PackedCoefficients { get; }
 
         /// <summary>
         /// The data in a form that allows fast bitwise XOR operations.
@@ -44,7 +44,7 @@
         {
             _numCoefficients = numCoefficients;
             _numData = numData;
-            _packedCoefficients = packedCoefficients;
+            PackedCoefficients = packedCoefficients;
             PackedData = packedData;
         }
         
@@ -55,7 +55,7 @@
             new Slice(
                 numCoefficients: _numCoefficients,
                 numData: _numData,
-                packedCoefficients: _packedCoefficients.Clone(),
+                packedCoefficients: PackedCoefficients.Clone(),
                 packedData: PackedData.Clone()
             );
         
@@ -77,7 +77,7 @@
         /// Retrieves the coefficients from this <see cref="Slice"/>.
         /// </summary>
         public IEnumerable<bool> GetCoefficients() =>
-            _packedCoefficients
+            PackedCoefficients
                 .GetBytes()
                 .ToBits()
                 .Take(_numCoefficients);
@@ -97,7 +97,7 @@
         public void Xor(
             Slice from)
         {
-            _packedCoefficients.Xor(from._packedCoefficients);
+            PackedCoefficients.Xor(@from.PackedCoefficients);
             PackedData.Xor(@from.PackedData);
         }
     }

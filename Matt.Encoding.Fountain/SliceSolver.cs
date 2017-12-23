@@ -1,7 +1,6 @@
 ﻿namespace Matt.Encoding.Fountain
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -25,7 +24,12 @@
         /// <summary>
         /// The list of coefficients that is used by Gaussian Elimination to solve things.
         /// </summary>
-        private readonly IList<BitArray> _coefficientsList = new List<BitArray>();
+        private readonly IList<Packed> _coefficientsList = new List<Packed>();
+
+        /// <summary>
+        /// The number of coefficients per <see cref="Slice"/>.
+        /// </summary>
+        private readonly int _numCoefficients;
 
         /// <summary>
         /// The number of bytes of data in each <see cref="Slice"/>.
@@ -50,6 +54,7 @@
         /// <param name="totalLength">The total length of the original data.</param>
         public SliceSolver(int sliceSize, int totalLength)
         {
+            _numCoefficients = (totalLength - 1) / sliceSize + 1;
             _sliceSize = sliceSize;
             _totalLength = totalLength;
         }
@@ -62,7 +67,7 @@
             slice = slice.Clone();
             using (await _guard.LockAsync())
             {
-                _coefficientsList.Add(new BitArray(slice.GetCoefficients().ToArray()));
+                _coefficientsList.Add(slice.PackedCoefficients);
                 _solutionsList.Add(slice.PackedData);
             }
         }
@@ -96,7 +101,7 @@
             using (await _guard.LockAsync())
             {
                 var solved = false;
-                foreach (var step in GaussianEliminationHelpers.Solve(_coefficientsList))
+                foreach (var step in GaussianEliminationHelpers.Solve(_coefficientsList, _numCoefficients))
                 {
                     switch (step.Operation)
                     {
