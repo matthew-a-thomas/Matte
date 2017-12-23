@@ -30,11 +30,11 @@
         /// <summary>
         /// Creates a new non-thread-safe piece of mutable data on which you can quickly perform bitwise XOR.
         /// </summary>
-        /// <param name="packedBytes">A compact representation of the contained data. Must be non-null.</param>
+        /// <param name="contents">A compact representation of the contained data. Must be non-null.</param>
         /// <exception cref="ArgumentException"></exception>
-        public Packed(long[] packedBytes)
+        public Packed(long[] contents)
         {
-            _contents = packedBytes ?? throw new ArgumentNullException(nameof(packedBytes));
+            _contents = contents ?? throw new ArgumentNullException(nameof(contents));
         }
 
         /// <summary>

@@ -20,7 +20,7 @@
                 {
                     for (var j = 0; j < width; ++j)
                     {
-                        Assert.AreEqual(i == j, list[i].GetBit(j));
+                        Assert.AreEqual(i == j, list[i].GetLeastSignificantBit(j));
                     }
                 }
             }

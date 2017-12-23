@@ -9,15 +9,15 @@
     public static class PackedExtensions
     {
         /// <summary>
-        /// Returns the bit at the given <paramref name="index"/>.
+        /// Returns the bit at the given <paramref name="index"/> from the end of this <see cref="Packed"/>.
         /// </summary>
-        public static bool GetBit(
+        public static bool GetLeastSignificantBit(
             this Packed packed,
             int index)
         {
             const int numBitsInLong = 64;
             
-            var l = packed.Contents[index / numBitsInLong];
+            var l = packed.Contents[packed.Contents.Count - index / numBitsInLong - 1];
             return ((l >> index % numBitsInLong) & 1) != 0;
         }
         
