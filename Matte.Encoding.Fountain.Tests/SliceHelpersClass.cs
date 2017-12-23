@@ -3,7 +3,6 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using System.Threading.Tasks;
     using Matt.Random.Adapters;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -53,7 +52,7 @@
             
             // TODO: This test feels like it's testing too much and making too many assumptions.
             [TestMethod]
-            public async Task ProducesSolvableSequenceAfterSystematicSection()
+            public void ProducesSolvableSequenceAfterSystematicSection()
             {
                 var data = new byte[]
                 {
@@ -74,8 +73,9 @@
                 ).Skip(data.Length).Take(10).ToList();
                 var solver = new SliceSolver(2, data.Length);
                 foreach (var slice in mixedSection)
-                    await solver.RememberAsync(slice);
-                var solution = await solver.TrySolveAsync();
+                    solver.Remember(slice);
+                var solved = solver.TrySolve(out var solution);
+                Assert.IsTrue(solved);
                 Assert.IsNotNull(solution);
                 Assert.IsTrue(solution.SequenceEqual(data));
             }

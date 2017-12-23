@@ -3,10 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using Bits;
     using Math.Linear.Solving;
-    using Nito.AsyncEx;
 
     /// <summary>
     /// Uses <see cref="Slice"/>s to decode the original data that went into making those <see cref="Slice"/>s.
@@ -16,11 +14,6 @@
     /// </remarks>
     public sealed class SliceSolver
     {
-        /// <summary>
-        /// Gives us thread safety in an async context.
-        /// </summary>
-        private readonly AsyncLock _guard = new AsyncLock();
-        
         /// <summary>
         /// The list of coefficients that is used by Gaussian Elimination to solve things.
         /// </summary>
@@ -62,14 +55,11 @@
         /// <summary>
         /// Asynchronously records the given <see cref="Slice"/> so that it can be used for solving later on.
         /// </summary>
-        public async Task RememberAsync(Slice slice)
+        public void Remember(Slice slice)
         {
             slice = slice.Clone();
-            using (await _guard.LockAsync())
-            {
-                _coefficientsList.Add(slice.PackedCoefficients);
-                _solutionsList.Add(slice.PackedData);
-            }
+            _coefficientsList.Add(slice.PackedCoefficients);
+            _solutionsList.Add(slice.PackedData);
         }
 
         /// <summary>
@@ -89,43 +79,50 @@
 
         /// <summary>
         /// Tries to decode the original data from all <see cref="Slice"/>s previously given to
-        /// <see cref="RememberAsync"/>.
+        /// <see cref="Remember"/>.
         /// </summary>
         /// <remarks>
         /// Decoding the original data is akin to solving a set of linear equations. Each <see cref="Slice"/>
-        /// represents one more equation. So enough <see cref="Slice"/>s have to be given to <see cref="RememberAsync"/>
+        /// represents one more equation. So enough <see cref="Slice"/>s have to be given to <see cref="Remember"/>
         /// in order to be able to solve them.
         /// </remarks>
-        public async Task<byte[]> TrySolveAsync()
+        public bool TrySolve(out byte[] solution)
         {
-            using (await _guard.LockAsync())
+            var solved = false;
+            foreach (var step in GaussianEliminationHelpers.Solve(
+                _coefficientsList,
+                _numCoefficients))
             {
-                var solved = false;
-                foreach (var step in GaussianEliminationHelpers.Solve(_coefficientsList, _numCoefficients))
+                switch (step.Operation)
                 {
-                    switch (step.Operation)
-                    {
-                        case Operation.Complete:
-                            solved = true;
-                            break;
-                        case Operation.Swap:
-                            Swap(step.From, step.To, _solutionsList);
-                            break;
-                        case Operation.Xor:
-                            Xor(step.From, step.To, _solutionsList);
-                            break;
-                        default:
-                            throw new NotImplementedException();
-                    }
+                    case Operation.Complete:
+                        solved = true;
+                        break;
+                    case Operation.Swap:
+                        Swap(
+                            step.From,
+                            step.To,
+                            _solutionsList);
+                        break;
+                    case Operation.Xor:
+                        Xor(
+                            step.From,
+                            step.To,
+                            _solutionsList);
+                        break;
+                    default:
+                        throw new NotImplementedException();
                 }
-                if (!solved)
-                    return null;
-                return
-                    _solutionsList
+            }
+
+            solution =
+                solved
+                    ? _solutionsList
                         .SelectMany(x => x.GetBytes(_sliceSize))
                         .Take(_totalLength)
-                        .ToArray();
-            }
+                        .ToArray()
+                    : null;
+            return solved;
         }
 
         /// <summary>

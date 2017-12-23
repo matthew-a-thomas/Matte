@@ -1,14 +1,13 @@
 ﻿namespace Matte.Encoding.Fountain.Tests
 {
     using System.Linq;
-    using System.Threading.Tasks;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class SliceSolverClass
     {
         [TestMethod]
-        public async Task CanSolveWithACombinedSliceAsync()
+        public void CanSolveWithACombinedSlice()
         {
             const byte
                 value1 = 0xFF,
@@ -21,9 +20,10 @@
                     coefficients: new [] { true, true },
                     data: new [] { (byte)(value2 ^ value1) });
             var solver = new SliceSolver(1, 2);
-            await solver.RememberAsync(slice1);
-            await solver.RememberAsync(slice2);
-            var solution = await solver.TrySolveAsync();
+            solver.Remember(slice1);
+            solver.Remember(slice2);
+            var solved = solver.TrySolve(out var solution);
+            Assert.IsTrue(solved, "Didn't find a solution");
             Assert.IsNotNull(solution, "Didn't find a solution");
             Assert.AreEqual(solution.Length, 2, $"Found a solution of {solution.Length} bytes, instead of 2 bytes");
             Assert.AreEqual(solution[0], value1, $"Found the wrong first byte: {solution[0]} instead of {value1}");
@@ -31,15 +31,16 @@
         }
         
         [TestMethod]
-        public async Task DoesNotSolvePrematurelyAsync()
+        public void DoesNotSolvePrematurely()
         {
             var solver = new SliceSolver(1, 1);
-            var solution = await solver.TrySolveAsync();
+            var solved = solver.TrySolve(out var solution);
+            Assert.IsFalse(solved, "It created a solution from nothing");
             Assert.IsNull(solution, "It created a solution from nothing");
         }
         
         [TestMethod]
-        public async Task PutsOneByteBackTogetherAsync()
+        public void PutsOneByteBackTogether()
         {
             const byte value = 0xF5;
             var slice = SliceHelpers.CreateSlice(
@@ -47,15 +48,16 @@
                 data: new [] { value }
             );
             var solver = new SliceSolver(1, 1);
-            await solver.RememberAsync(slice);
-            var solution = await solver.TrySolveAsync();
+            solver.Remember(slice);
+            var solved = solver.TrySolve(out var solution);
+            Assert.IsTrue(solved, "Didn't find a solution");
             Assert.IsNotNull(solution, "Didn't find a solution");
             Assert.AreEqual(solution.Length, 1, $"Found a solution of {solution.Length} bytes, instead of 1 byte");
             Assert.AreEqual(solution[0], value, $"Found the wrong solution: {solution[0]} instead of {value}");
         }
         
         [TestMethod]
-        public async Task PutsTwoSequentialSlicesBackTogetherAsync()
+        public void PutsTwoSequentialSlicesBackTogether()
         {
             const byte
                 value1 = 0xFF,
@@ -68,9 +70,10 @@
                     coefficients: new [] { false, true },
                     data: new [] { value2 });
             var solver = new SliceSolver(1, 2);
-            await solver.RememberAsync(slice1);
-            await solver.RememberAsync(slice2);
-            var solution = await solver.TrySolveAsync();
+            solver.Remember(slice1);
+            solver.Remember(slice2);
+            var solved = solver.TrySolve(out var solution);
+            Assert.IsTrue(solved, "Didn't find a solution");
             Assert.IsNotNull(solution, "Didn't find a solution");
             Assert.AreEqual(solution.Length, 2, $"Found a solution of {solution.Length} bytes, instead of 2 bytes");
             Assert.AreEqual(solution[0], value1, $"Found the wrong first byte: {solution[0]} instead of {value1}");
@@ -78,7 +81,7 @@
         }
         
         [TestMethod]
-        public async Task WorksEvenWhenSliceSizeAndNumberOfSlicesDoNotEvenlyDivideData()
+        public void WorksEvenWhenSliceSizeAndNumberOfSlicesDoNotEvenlyDivideData()
         {
             var originalData = new []
             {
@@ -96,9 +99,10 @@
                     data: new [] { (byte)(originalData[0] ^ originalData[2]), originalData[1] }
                 );
             var solver = new SliceSolver(2, 3);
-            await solver.RememberAsync(slice2);
-            await solver.RememberAsync(slice1);
-            var solution = await solver.TrySolveAsync();
+            solver.Remember(slice2);
+            solver.Remember(slice1);
+            var solved = solver.TrySolve(out var solution);
+            Assert.IsTrue(solved, "Didn't find a solution");
             Assert.IsNotNull(solution, "Didn't find a solution");
             Assert.AreEqual(solution.Length, 3, $"Found a solution of {solution.Length} bytes, instead of 3 bytes");
             Assert.IsTrue(solution.SequenceEqual(originalData), "Found different solution than original data");
