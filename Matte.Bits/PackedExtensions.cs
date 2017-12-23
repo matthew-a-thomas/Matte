@@ -37,7 +37,20 @@
             var l = packed.Contents[packed.Contents.Count - index / numBitsInLong - 1];
             return ((l >> index % numBitsInLong) & 1) != 0;
         }
-        
+
+        /// <summary>
+        /// Returns the byte at the given <paramref name="index"/> from the end of this <see cref="Packed"/>.
+        /// </summary>
+        public static byte GetLeastSignificantByte(
+            this Packed packed,
+            int index)
+        {
+            const int numBytesInLong = sizeof(long);
+
+            var l = packed.Contents[packed.Contents.Count - index / numBytesInLong - 1];
+            return (byte) ((l >> (index % numBytesInLong) * 8) & 0xFF);
+        }
+
         /// <summary>
         /// Gets the given number of bytes from this <see cref="Packed"/>.
         /// </summary>

@@ -39,18 +39,52 @@
             }
 
             [TestMethod]
+            public void CorrectlyGetsFromFromPacked1()
+            {
+                var packed = new Packed(new long[] {1});
+                Assert.IsTrue(packed.GetLeastSignificantBit(0));
+            }
+
+            [TestMethod]
             public void CorrectlyGetsFromFromPacked2()
             {
                 var packed = new Packed(new long[] {2});
                 Assert.IsFalse(packed.GetLeastSignificantBit(0));
                 Assert.IsTrue(packed.GetLeastSignificantBit(1));
             }
+        }
 
+        [TestClass]
+        public class GetLeastSignificantByteMethod
+        {
             [TestMethod]
-            public void CorrectlyGetsFromFromPacked1()
+            public void CorrectlyGetsAcrossBoundaries()
+            {
+                var packed = new Packed(new long[] {1, 2});
+                Assert.AreEqual(1, packed.GetLeastSignificantByte(8));
+                Assert.AreEqual(2, packed.GetLeastSignificantByte(0));
+            }
+            
+            [TestMethod]
+            public void CorrectlyGetsFromPacked1()
             {
                 var packed = new Packed(new long[] {1});
-                Assert.IsTrue(packed.GetLeastSignificantBit(0));
+                Assert.AreEqual(1, packed.GetLeastSignificantByte(0));
+            }
+            
+            [TestMethod]
+            public void CorrectlyGetsFromPacked2()
+            {
+                var packed = new Packed(new long[] {2});
+                Assert.AreEqual(2, packed.GetLeastSignificantByte(0));
+            }
+            
+            [TestMethod]
+            public void CorrectlyGetsFromPacked256()
+            {
+                var packed = new Packed(new long[] {256});
+                Assert.AreEqual(0, packed.GetLeastSignificantByte(0));
+                Assert.AreEqual(1, packed.GetLeastSignificantByte(1));
             }
         }
     }
