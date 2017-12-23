@@ -1,8 +1,6 @@
 ﻿namespace Matte.Encoding.Fountain
 {
-    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Bits;
     using Interfaces;
 
@@ -36,7 +34,18 @@
         /// </summary>
         internal Packed PackedData { get; }
 
-        private Slice(
+        /// <summary>
+        /// Creates a new <see cref="Slice"/>.
+        /// </summary>
+        /// <param name="numCoefficients">
+        /// The number of coefficients that are in <paramref name="packedCoefficients"/>.
+        /// </param>
+        /// <param name="numData">
+        /// The number of bytes that are in <paramref name="packedData"/>.
+        /// </param>
+        /// <param name="packedCoefficients">A compact representation of the coefficients.</param>
+        /// <param name="packedData">A compact representation of the data.</param>
+        public Slice(
             int numCoefficients,
             int numData,
             Packed packedCoefficients,
@@ -59,33 +68,6 @@
                 packedData: PackedData.Clone()
             );
         
-        /// <summary>
-        /// Creates a new <see cref="Slice"/> from the given <paramref name="coefficients"/> and
-        /// <paramref name="data"/>.
-        /// </summary>
-        public static Slice Create(
-            IReadOnlyCollection<bool> coefficients,
-            IReadOnlyCollection<byte> data) =>
-            new Slice(
-                numCoefficients: coefficients.Count,
-                numData: data.Count,
-                packedCoefficients: Packed.Create(coefficients),
-                packedData: Packed.Create(data)
-            );
-
-        /// <summary>
-        /// Retrieves the coefficients from this <see cref="Slice"/>.
-        /// </summary>
-        public IEnumerable<bool> GetCoefficients();
-
-        /// <summary>
-        /// Retrieves the data from this <see cref="Slice"/>.
-        /// </summary>
-        public IEnumerable<byte> GetData() =>
-            PackedData
-                .GetBytes()
-                .Take(_numData);
-
         /// <summary>
         /// Quickly performs a bitwise XOR into this <see cref="Slice"/>'s coefficients and data from the given
         /// <see cref="Slice"/>.

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Bits;
     using Lists;
     using Matt.Random;
 
@@ -12,6 +13,20 @@
     /// </summary>
     public static class SliceHelpers
     {
+        /// <summary>
+        /// Creates a new <see cref="Slice"/> from the given <paramref name="coefficients"/> and
+        /// <paramref name="data"/>.
+        /// </summary>
+        public static Slice CreateSlice(
+            IReadOnlyCollection<bool> coefficients,
+            IReadOnlyCollection<byte> data) =>
+            new Slice(
+                numCoefficients: coefficients.Count,
+                numData: data.Count,
+                packedCoefficients: PackedHelpers.CreateFrom(coefficients),
+                packedData: PackedHelpers.CreateFrom(data)
+            );
+        
         // TODO: This function creates an expensive enumerable--can we use async? or Reactive?
         /// <summary>
         /// Generates an endless sequence of <see cref="Slice"/>s, each of which is a specific combination of the

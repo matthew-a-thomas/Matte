@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Interfaces;
 
     /// <summary>
@@ -15,19 +14,18 @@
     /// faster. Preliminary testing suggests that on a 64-bit machine the bitwise XOR operation is ~100x faster on bytes
     /// that have been packed into an array of long[] than the equivalent operation on a plain array of byte[].
     /// </remarks>
-    [SuppressMessage("ReSharper",
-        "InheritdocConsiderUsage")]
+    [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
     public sealed class Packed : ICloneable<Packed>, ISupportsXor<Packed>
     {
         /// <summary>
         /// The internal array of <see cref="long"/>s.
         /// </summary>
-        public IReadOnlyList<long> PackedBytes => _packedBytes;
+        public IReadOnlyList<long> Contents => _contents;
         
         /// <summary>
         /// The data stored in a manner that allows fast XOR operations.
         /// </summary>
-        private readonly long[] _packedBytes;
+        private readonly long[] _contents;
         
         /// <summary>
         /// Creates a new non-thread-safe piece of mutable data on which you can quickly perform bitwise XOR.
@@ -36,36 +34,13 @@
         /// <exception cref="ArgumentException"></exception>
         public Packed(long[] packedBytes)
         {
-            _packedBytes = packedBytes ?? throw new ArgumentNullException(nameof(packedBytes));
+            _contents = packedBytes ?? throw new ArgumentNullException(nameof(packedBytes));
         }
 
         /// <summary>
         /// Creates an exact copy of this <see cref="Packed"/>.
         /// </summary>
-        public Packed Clone() => new Packed(_packedBytes.Clone() as long[]);
-
-        /// <summary>
-        /// Creates a new <see cref="Packed"/> from the given <paramref name="bits"/>.
-        /// </summary>
-        /// <remarks>
-        /// This method ensures that the correct number of bits are prepended before they are packed.
-        /// </remarks>
-        public static Packed Create(
-            IReadOnlyCollection<bool> bits);
-
-        /// <summary>
-        /// Creates a new <see cref="Packed"/> from the given <paramref name="data"/>.
-        /// </summary>
-        public static Packed Create(
-            IEnumerable<byte> data);
-
-        /// <summary>
-        /// Retrieves a copy of the packed data.
-        /// </summary>
-        /// <remarks>
-        /// This will have a multiple of 8 bytes.
-        /// </remarks>
-        public IEnumerable<byte> GetBytes();
+        public Packed Clone() => new Packed(_contents.Clone() as long[]);
 
         /// <summary>
         /// Quickly performs bitwise XOR from the given <see cref="Packed"/> into the contained data.
@@ -76,10 +51,10 @@
             if (from == null)
                 return;
             var length = Math.Min(
-                _packedBytes.Length,
-                from._packedBytes.Length);
+                _contents.Length,
+                from._contents.Length);
             for (var i = 0; i < length; ++i)
-                _packedBytes[i] ^= from._packedBytes[i];
+                _contents[i] ^= from._contents[i];
         }
     }
 }

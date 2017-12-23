@@ -37,7 +37,7 @@
             {
                 var coefficients = new List<Packed>
                 {
-                    Packed.Create(new[] { true, false, false })
+                    PackedHelpers.CreateFrom(new[] { true, false, false })
                 };
                 var solution = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
 
@@ -50,9 +50,9 @@
             {
                 var coefficients = new List<Packed>
                 {
-                    Packed.Create(new [] { true, true, true }),
-                    Packed.Create(new [] { false, true, true }),
-                    Packed.Create(new [] { false, true, false })
+                    PackedHelpers.CreateFrom(new [] { true, true, true }),
+                    PackedHelpers.CreateFrom(new [] { false, true, true }),
+                    PackedHelpers.CreateFrom(new [] { false, true, false })
                 };
                 var copy = coefficients.Select(x => x.Clone()).ToList();
                 
@@ -96,9 +96,9 @@
             {
                 var coefficients = new List<Packed>
                 {
-                    Packed.Create(new[] { true, false, false }),
-                    Packed.Create(new[] { false, true, false }),
-                    Packed.Create(new[] { false, false, true })
+                    PackedHelpers.CreateFrom(new[] { true, false, false }),
+                    PackedHelpers.CreateFrom(new[] { false, true, false }),
+                    PackedHelpers.CreateFrom(new[] { false, false, true })
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);
@@ -111,9 +111,9 @@
             {
                 var coefficients = new List<Packed>
                 {
-                    Packed.Create(new[] { false, false, true }),
-                    Packed.Create(new[] { false, true, false }),
-                    Packed.Create(new[] { true, false, false })
+                    PackedHelpers.CreateFrom(new[] { false, false, true }),
+                    PackedHelpers.CreateFrom(new[] { false, true, false }),
+                    PackedHelpers.CreateFrom(new[] { true, false, false })
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);
@@ -126,9 +126,9 @@
             {
                 var coefficients = new List<Packed>
                 {
-                    Packed.Create(new[] {true, false, true}),
-                    Packed.Create(new[] {true, true, true}),
-                    Packed.Create(new[] {false, false, true})
+                    PackedHelpers.CreateFrom(new[] {true, false, true}),
+                    PackedHelpers.CreateFrom(new[] {true, true, true}),
+                    PackedHelpers.CreateFrom(new[] {false, false, true})
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);
@@ -141,12 +141,12 @@
             {
                 var coefficients = new List<Packed>
                 {
-                    Packed.Create(new[] { false, false, true }),
-                    Packed.Create(new[] { false, true, false }),
-                    Packed.Create(new[] { true, false, false }),
-                    Packed.Create(new[] { false, false, true }),
-                    Packed.Create(new[] { false, true, false }),
-                    Packed.Create(new[] { true, false, false })
+                    PackedHelpers.CreateFrom(new[] { false, false, true }),
+                    PackedHelpers.CreateFrom(new[] { false, true, false }),
+                    PackedHelpers.CreateFrom(new[] { true, false, false }),
+                    PackedHelpers.CreateFrom(new[] { false, false, true }),
+                    PackedHelpers.CreateFrom(new[] { false, true, false }),
+                    PackedHelpers.CreateFrom(new[] { true, false, false })
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);

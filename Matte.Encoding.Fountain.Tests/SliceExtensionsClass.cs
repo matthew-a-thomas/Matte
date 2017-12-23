@@ -12,7 +12,7 @@
             [TestMethod]
             public void ClonesASingleSlice()
             {
-                var slice = Slice.Create(coefficients: new bool[5], data: new byte[5]);
+                var slice = SliceHelpers.CreateSlice(coefficients: new bool[5], data: new byte[5]);
                 var sequence = new [] { slice };
                 var mixed = sequence.Mix();
                 Assert.AreEqual(5, mixed.GetCoefficients().Count());

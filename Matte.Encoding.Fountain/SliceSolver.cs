@@ -122,7 +122,7 @@
                     return null;
                 return
                     _solutionsList
-                        .SelectMany(x => x.GetBytes().Take(_sliceSize))
+                        .SelectMany(x => x.GetBytes(_sliceSize))
                         .Take(_totalLength)
                         .ToArray();
             }

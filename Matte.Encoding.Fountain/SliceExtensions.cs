@@ -9,6 +9,18 @@
     public static class SliceExtensions
     {
         /// <summary>
+        /// Gets the coefficients contained within this <see cref="Slice"/>.
+        /// </summary>
+        public static IReadOnlyCollection<bool> GetCoefficients(
+            this Slice slice) => throw new NotImplementedException();
+
+        /// <summary>
+        /// Gets the data contained within this <see cref="Slice"/>.
+        /// </summary>
+        public static IReadOnlyCollection<byte> GetData(
+            this Slice slice) => throw new NotImplementedException();
+        
+        /// <summary>
         /// Splits the given <paramref name="data"/> up into as many <see cref="Slice"/>s as needed to have slices of
         /// size <paramref name="sliceSize"/>.
         /// </summary>
@@ -30,7 +42,7 @@
                     destinationIndex: 0,
                     length: Math.Min(data.Length - sourceIndex, sliceSize)
                 );
-                var slice = Slice.Create(
+                var slice = SliceHelpers.CreateSlice(
                     coefficients: coefficients,
                     data: sliceData
                 );
