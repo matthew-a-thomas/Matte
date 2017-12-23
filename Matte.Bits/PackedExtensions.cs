@@ -59,6 +59,12 @@
         /// </remarks>
         public static IEnumerable<byte> GetBytes(
             this Packed packed,
-            int numBytes) => throw new NotImplementedException();
+            int numBytes) =>
+            Enumerable
+                .Range(
+                    0,
+                    numBytes)
+                .Select(i => numBytes - i - 1)
+                .Select(packed.GetLeastSignificantByte);
     }
 }
