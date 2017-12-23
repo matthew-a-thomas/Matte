@@ -9,6 +9,16 @@
     public static class PackedExtensions
     {
         /// <summary>
+        /// Returns the bit located at the given <paramref name="index"/> within the last <paramref name="numBits"/>
+        /// from the end of this <see cref="Packed"/>.
+        /// </summary>
+        public static bool GetBit(
+            this Packed packed,
+            int numBits,
+            int index) =>
+            packed.GetLeastSignificantBit(numBits - index - 1);
+
+        /// <summary>
         /// Gets the given number of bits from this <see cref="Packed"/>.
         /// </summary>
         /// <remarks>

@@ -7,6 +7,18 @@
     public class PackedExtensionsClass
     {
         [TestClass]
+        public class GetBitMethod
+        {
+            [TestMethod]
+            public void GetsLastFourBitsOfPacked0xF()
+            {
+                var packed = new Packed(new long[] {0xF});
+                for (var i = 0; i < 4; ++i)
+                    Assert.IsTrue(packed.GetBit(4, i));
+            }
+        }
+
+        [TestClass]
         public class GetBitsMethod
         {
             [TestMethod]
