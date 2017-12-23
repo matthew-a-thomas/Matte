@@ -50,18 +50,14 @@
         /// <remarks>
         /// This method ensures that the correct number of bits are prepended before they are packed.
         /// </remarks>
-        public static Packed Create(IReadOnlyCollection<bool> bits) =>
-            Create(
-                bits
-                    .Pad()
-                    .ToBytes()
-            );
-        
+        public static Packed Create(
+            IReadOnlyCollection<bool> bits);
+
         /// <summary>
         /// Creates a new <see cref="Packed"/> from the given <paramref name="data"/>.
         /// </summary>
-        public static Packed Create(IEnumerable<byte> data) =>
-            new Packed(data.Pack().ToArray());
+        public static Packed Create(
+            IEnumerable<byte> data);
 
         /// <summary>
         /// Retrieves a copy of the packed data.
@@ -69,7 +65,7 @@
         /// <remarks>
         /// This will have a multiple of 8 bytes.
         /// </remarks>
-        public IEnumerable<byte> GetBytes() => _packedBytes.Unpack();
+        public IEnumerable<byte> GetBytes();
 
         /// <summary>
         /// Quickly performs bitwise XOR from the given <see cref="Packed"/> into the contained data.

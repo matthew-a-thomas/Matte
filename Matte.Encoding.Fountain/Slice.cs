@@ -69,18 +69,14 @@
             new Slice(
                 numCoefficients: coefficients.Count,
                 numData: data.Count,
-                packedCoefficients: Packed.Create(coefficients.ToBytes()),
+                packedCoefficients: Packed.Create(coefficients),
                 packedData: Packed.Create(data)
             );
 
         /// <summary>
         /// Retrieves the coefficients from this <see cref="Slice"/>.
         /// </summary>
-        public IEnumerable<bool> GetCoefficients() =>
-            PackedCoefficients
-                .GetBytes()
-                .ToBits()
-                .Take(_numCoefficients);
+        public IEnumerable<bool> GetCoefficients();
 
         /// <summary>
         /// Retrieves the data from this <see cref="Slice"/>.
