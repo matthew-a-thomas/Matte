@@ -7,23 +7,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte", "Matte\Matte.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Tests", "Matte.Tests\Matte.Tests.csproj", "{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Bits", "Matt.Bits\Matt.Bits.csproj", "{FA98AD19-3704-41DE-A9D9-51D57175901A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Bits", "Matte.Bits\Matte.Bits.csproj", "{FA98AD19-3704-41DE-A9D9-51D57175901A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Bits.Tests", "Matt.Bits.Tests\Matt.Bits.Tests.csproj", "{407F9386-D0CC-468F-B4C5-19723972B4C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Bits.Tests", "Matte.Bits.Tests\Matte.Bits.Tests.csproj", "{407F9386-D0CC-468F-B4C5-19723972B4C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Encoding.Fountain", "Matt.Encoding.Fountain\Matt.Encoding.Fountain.csproj", "{9D0D0632-92A9-44F4-BAC3-16099A698D33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Encoding.Fountain", "Matte.Encoding.Fountain\Matte.Encoding.Fountain.csproj", "{9D0D0632-92A9-44F4-BAC3-16099A698D33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Encoding.Fountain.Tests", "Matt.Encoding.Fountain.Tests\Matt.Encoding.Fountain.Tests.csproj", "{82C63E47-DADF-4708-A320-B1141B15993E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Encoding.Fountain.Tests", "Matte.Encoding.Fountain.Tests\Matte.Encoding.Fountain.Tests.csproj", "{82C63E47-DADF-4708-A320-B1141B15993E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Interfaces", "Matt.Interfaces\Matt.Interfaces.csproj", "{08346222-910F-4690-9BF0-A8241F3681E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Interfaces", "Matte.Interfaces\Matte.Interfaces.csproj", "{08346222-910F-4690-9BF0-A8241F3681E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Lists", "Matt.Lists\Matt.Lists.csproj", "{6B57FD97-9E6B-42E1-B50A-32F541BC3548}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Lists", "Matte.Lists\Matte.Lists.csproj", "{6B57FD97-9E6B-42E1-B50A-32F541BC3548}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Lists.Tests", "Matt.Lists.Tests\Matt.Lists.Tests.csproj", "{B28BEFEE-3FF1-46F1-96EA-372492D7E28E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Lists.Tests", "Matte.Lists.Tests\Matte.Lists.Tests.csproj", "{B28BEFEE-3FF1-46F1-96EA-372492D7E28E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Math.Linear.Solving", "Matt.Math.Linear.Solving\Matt.Math.Linear.Solving.csproj", "{93FD102C-630C-4434-84CD-563EC36B369D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Math.Linear.Solving", "Matte.Math.Linear.Solving\Matte.Math.Linear.Solving.csproj", "{93FD102C-630C-4434-84CD-563EC36B369D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matt.Math.Linear.Solving.Tests", "Matt.Math.Linear.Solving.Tests\Matt.Math.Linear.Solving.Tests.csproj", "{D5040D78-42AC-4880-8F78-CD0D0326D885}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Math.Linear.Solving.Tests", "Matte.Math.Linear.Solving.Tests\Matte.Math.Linear.Solving.Tests.csproj", "{D5040D78-42AC-4880-8F78-CD0D0326D885}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
