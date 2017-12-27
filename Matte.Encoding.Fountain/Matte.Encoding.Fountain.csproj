@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Encoding.Fountain</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Matt.Random" Version="2.2.1" />
+    <PackageReference Include="Matt.Random" Version="2.2.3" />
     <PackageReference Include="NETStandard.Library" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
