@@ -7,20 +7,24 @@
     /// <summary>
     /// Solves a system of equations
     /// </summary>
-    public sealed class GaussianEliminationHelpers
+    public static class GaussianEliminationHelpers
     {
         /// <summary>
-        /// Puts the given system of equations into reduced row echelon form as much as possible. Returns the steps
-        /// required to solve the system of equations. The steps will end with a <see cref="Operation.Complete"/> step
-        /// if the system of equations is solvable.
+        /// Puts the given system of equations into reduced row echelon form as
+        /// much as possible. Returns the steps required to solve the system of
+        /// equations. The steps will end with a
+        /// <see cref="Operation.Complete"/> step if the system of equations is
+        /// solvable.
         /// </summary>
         /// <remarks>
-        /// The given <paramref name="packedCoefficients"/> are modified because we actually put them into reduced row echelon
-        /// form in order to find the steps necessary to do so.
+        /// The given <paramref name="packedCoefficients"/> are modified because
+        /// we actually put them into reduced row echelon form in order to find
+        /// the steps necessary to do so.
         /// 
-        /// So make sure that any data associated with the given <paramref name="packedCoefficients"/> is mutated accordingly.
+        /// So make sure that any data associated with the given
+        /// <paramref name="packedCoefficients"/> is mutated accordingly.
         /// </remarks>
-        public static IEnumerable<Step> Solve(IList<Packed> packedCoefficients, int numCoefficients)
+        public static IEnumerable<Step> Solve(IList<long[]> packedCoefficients, int numCoefficients)
         {
             if (packedCoefficients == null || numCoefficients <= 0)
                 yield break;
@@ -99,7 +103,7 @@
         /// Swaps the coefficients and solutions between the two given rows
         /// </summary>
         private static Step SwapRows(
-            IList<Packed> list,
+            IList<long[]> list,
             int fromRow,
             int toRow)
         {
@@ -116,7 +120,7 @@
         /// XOR's the row at <paramref name="fromRow"/> into the row at <paramref name="toRow"/>, for both the coefficients and the solutions
         /// </summary>
         private static Step XorRows(
-            IList<Packed> list,
+            IList<long[]> list,
             int fromRow,
             int toRow)
         {

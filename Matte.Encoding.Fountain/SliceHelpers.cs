@@ -23,8 +23,8 @@
             new Slice(
                 numCoefficients: coefficients.Count,
                 numData: data.Count,
-                packedCoefficients: PackedHelpers.CreateFrom(coefficients),
-                packedData: PackedHelpers.CreateFrom(data)
+                packedCoefficients: coefficients.ToLongs(),
+                packedData: data.ToLongs()
             );
         
         // TODO: This function creates an expensive enumerable--can we use async? or Reactive?

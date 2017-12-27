@@ -26,6 +26,29 @@
                 .GetBytes(slice.NumData);
         
         /// <summary>
+        /// XORs together the given <see cref="Slice"/>s into a new
+        /// <see cref="Slice"/>.
+        /// </summary>
+        public static Slice Mix(this IEnumerable<Slice> slices)
+        {
+            var result = default(Slice);
+            var generated = false;
+            foreach (var item in slices)
+            {
+                if (generated)
+                {
+                    result.Xor(item);
+                }
+                else
+                {
+                    generated = true;
+                    result = item.Clone();
+                }
+            }
+            return result;
+        }
+        
+        /// <summary>
         /// Splits the given <paramref name="data"/> up into as many <see cref="Slice"/>s as needed to have slices of
         /// size <paramref name="sliceSize"/>.
         /// </summary>

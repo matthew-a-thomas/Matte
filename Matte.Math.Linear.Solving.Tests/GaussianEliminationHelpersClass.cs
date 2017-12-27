@@ -13,7 +13,7 @@
         public class SolveMethod
         {
             private static void AssertIsSolved(
-                IReadOnlyList<Packed> list,
+                IReadOnlyList<long[]> list,
                 int width)
             {
                 for (var i = 0; i < width; ++i)
@@ -29,15 +29,15 @@
             public void CanBeCalledWithoutEquations()
             {
                 // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-                GaussianEliminationHelpers.Solve(new List<Packed>(), 1).ToList();
+                GaussianEliminationHelpers.Solve(new List<long[]>(), 1).ToList();
             }
 
             [TestMethod]
             public void DoesNotSolveUnsolvableSystem()
             {
-                var coefficients = new List<Packed>
+                var coefficients = new List<long[]>
                 {
-                    PackedHelpers.CreateFrom(new[] { true, false, false })
+                    new[] { true, false, false }.ToLongs()
                 };
                 var solution = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
 
@@ -48,13 +48,13 @@
             [TestMethod]
             public void ProducesStepsWhichResultInIdenticalChangesAndASolution()
             {
-                var coefficients = new List<Packed>
+                var coefficients = new List<long[]>
                 {
-                    PackedHelpers.CreateFrom(new [] { true, true, true }),
-                    PackedHelpers.CreateFrom(new [] { false, true, true }),
-                    PackedHelpers.CreateFrom(new [] { false, true, false })
+                    new [] { true, true, true }.ToLongs(),
+                    new [] { false, true, true }.ToLongs(),
+                    new [] { false, true, false }.ToLongs()
                 };
-                var copy = coefficients.Select(x => x.Clone()).ToList();
+                var copy = coefficients.Select(x => x.Clone() as long[]).ToList();
                 
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 
@@ -64,7 +64,7 @@
                 AssertIsSolved(coefficients, 3);
                 
                 // Perform the steps on the copy
-                var mappedOperations = new Dictionary<Operation, Action<int, int, IList<Packed>>>
+                var mappedOperations = new Dictionary<Operation, Action<int, int, IList<long[]>>>
                 {
                     {
                         Operation.Swap,
@@ -94,11 +94,11 @@
             [TestMethod]
             public void SolvesAlreadySolvedSystem()
             {
-                var coefficients = new List<Packed>
+                var coefficients = new List<long[]>
                 {
-                    PackedHelpers.CreateFrom(new[] { true, false, false }),
-                    PackedHelpers.CreateFrom(new[] { false, true, false }),
-                    PackedHelpers.CreateFrom(new[] { false, false, true })
+                    new[] { true, false, false }.ToLongs(),
+                    new[] { false, true, false }.ToLongs(),
+                    new[] { false, false, true }.ToLongs()
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);
@@ -109,11 +109,11 @@
             [TestMethod]
             public void SolvesEasilySolvableSystem()
             {
-                var coefficients = new List<Packed>
+                var coefficients = new List<long[]>
                 {
-                    PackedHelpers.CreateFrom(new[] { false, false, true }),
-                    PackedHelpers.CreateFrom(new[] { false, true, false }),
-                    PackedHelpers.CreateFrom(new[] { true, false, false })
+                    new[] { false, false, true }.ToLongs(),
+                    new[] { false, true, false }.ToLongs(),
+                    new[] { true, false, false }.ToLongs()
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);
@@ -124,11 +124,11 @@
             [TestMethod]
             public void SolvesComplicatedSystem()
             {
-                var coefficients = new List<Packed>
+                var coefficients = new List<long[]>
                 {
-                    PackedHelpers.CreateFrom(new[] {true, false, true}),
-                    PackedHelpers.CreateFrom(new[] {true, true, true}),
-                    PackedHelpers.CreateFrom(new[] {false, false, true})
+                    new[] {true, false, true}.ToLongs(),
+                    new[] {true, true, true}.ToLongs(),
+                    new[] {false, false, true}.ToLongs()
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);
@@ -139,14 +139,14 @@
             [TestMethod]
             public void SolvesOverlySolvedSystem()
             {
-                var coefficients = new List<Packed>
+                var coefficients = new List<long[]>
                 {
-                    PackedHelpers.CreateFrom(new[] { false, false, true }),
-                    PackedHelpers.CreateFrom(new[] { false, true, false }),
-                    PackedHelpers.CreateFrom(new[] { true, false, false }),
-                    PackedHelpers.CreateFrom(new[] { false, false, true }),
-                    PackedHelpers.CreateFrom(new[] { false, true, false }),
-                    PackedHelpers.CreateFrom(new[] { true, false, false })
+                    new[] { false, false, true }.ToLongs(),
+                    new[] { false, true, false }.ToLongs(),
+                    new[] { true, false, false }.ToLongs(),
+                    new[] { false, false, true }.ToLongs(),
+                    new[] { false, true, false }.ToLongs(),
+                    new[] { true, false, false }.ToLongs()
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 Assert.IsTrue(steps.Count > 0);

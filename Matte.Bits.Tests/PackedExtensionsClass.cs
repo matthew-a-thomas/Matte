@@ -12,7 +12,7 @@
             [TestMethod]
             public void GetsLastFourBitsOfPacked0xF()
             {
-                var packed = new Packed(new long[] {0xF});
+                var packed = new long[] {0xF};
                 for (var i = 0; i < 4; ++i)
                     Assert.IsTrue(packed.GetBit(4, i));
             }
@@ -32,7 +32,7 @@
                     false,
                     true
                 };
-                var packed = PackedHelpers.CreateFrom(bits);
+                var packed = bits.ToLongs();
                 var newBits = packed.GetBits(bits.Length);
                 Assert.IsTrue(bits.SequenceEqual(newBits));
             }
@@ -56,7 +56,7 @@
                     0x08,
                     0x09
                 };
-                var packed = PackedHelpers.CreateFrom(bytes);
+                var packed = bytes.ToLongs();
                 var newBytes = packed.GetBytes(bytes.Length);
                 Assert.IsTrue(bytes.SequenceEqual(newBytes));
             }
@@ -68,7 +68,7 @@
             [TestMethod]
             public void CorrectlyGetsAcrossBoundaries()
             {
-                var packed = new Packed(new long[] {1, 2});
+                var packed = new long[] {1, 2};
                 Assert.IsTrue(packed.GetLeastSignificantBit(64));
                 Assert.IsTrue(packed.GetLeastSignificantBit(1));
                 Assert.IsFalse(packed.GetLeastSignificantBit(0));
@@ -77,14 +77,14 @@
             [TestMethod]
             public void CorrectlyGetsFromFromPacked1()
             {
-                var packed = new Packed(new long[] {1});
+                var packed = new long[] {1};
                 Assert.IsTrue(packed.GetLeastSignificantBit(0));
             }
 
             [TestMethod]
             public void CorrectlyGetsFromFromPacked2()
             {
-                var packed = new Packed(new long[] {2});
+                var packed = new long[] {2};
                 Assert.IsFalse(packed.GetLeastSignificantBit(0));
                 Assert.IsTrue(packed.GetLeastSignificantBit(1));
             }
@@ -96,7 +96,7 @@
             [TestMethod]
             public void CorrectlyGetsAcrossBoundaries()
             {
-                var packed = new Packed(new long[] {1, 2});
+                var packed = new long[] {1, 2};
                 Assert.AreEqual(1, packed.GetLeastSignificantByte(8));
                 Assert.AreEqual(2, packed.GetLeastSignificantByte(0));
             }
@@ -104,21 +104,21 @@
             [TestMethod]
             public void CorrectlyGetsFromPacked1()
             {
-                var packed = new Packed(new long[] {1});
+                var packed = new long[] {1};
                 Assert.AreEqual(1, packed.GetLeastSignificantByte(0));
             }
             
             [TestMethod]
             public void CorrectlyGetsFromPacked2()
             {
-                var packed = new Packed(new long[] {2});
+                var packed = new long[] {2};
                 Assert.AreEqual(2, packed.GetLeastSignificantByte(0));
             }
             
             [TestMethod]
             public void CorrectlyGetsFromPacked256()
             {
-                var packed = new Packed(new long[] {256});
+                var packed = new long[] {256};
                 Assert.AreEqual(0, packed.GetLeastSignificantByte(0));
                 Assert.AreEqual(1, packed.GetLeastSignificantByte(1));
             }

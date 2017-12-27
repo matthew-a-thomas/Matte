@@ -1,8 +1,8 @@
 ﻿namespace Matte.Encoding.Fountain
 {
     using System.Diagnostics.CodeAnalysis;
-    using Bits;
-    using Interfaces;
+    using System.Linq;
+    using Matte.Bits;
 
     /// <summary>
     /// Encapsulates coefficients and data in a way that allows fast bitwise XOR operations.
@@ -12,7 +12,7 @@
     /// </remarks>
     [SuppressMessage("ReSharper",
         "InheritdocConsiderUsage")]
-    public sealed class Slice : ICloneable<Slice>, ISupportsXor<Slice>
+    public sealed class Slice
     {
         /// <summary>
         /// The number of booleans that are in <see cref="PackedCoefficients"/>.
@@ -27,12 +27,12 @@
         /// <summary>
         /// The coefficients in a form that allows fast bitwise XOR operations.
         /// </summary>
-        internal Packed PackedCoefficients { get; }
+        internal long[] PackedCoefficients { get; }
 
         /// <summary>
         /// The data in a form that allows fast bitwise XOR operations.
         /// </summary>
-        internal Packed PackedData { get; }
+        internal long[] PackedData { get; }
 
         /// <summary>
         /// Creates a new <see cref="Slice"/>.
@@ -48,8 +48,8 @@
         public Slice(
             int numCoefficients,
             int numData,
-            Packed packedCoefficients,
-            Packed packedData)
+            long[] packedCoefficients,
+            long[] packedData)
         {
             NumCoefficients = numCoefficients;
             NumData = numData;
@@ -64,8 +64,8 @@
             new Slice(
                 numCoefficients: NumCoefficients,
                 numData: NumData,
-                packedCoefficients: PackedCoefficients.Clone(),
-                packedData: PackedData.Clone()
+                packedCoefficients: PackedCoefficients.ToArray(),
+                packedData: PackedData.ToArray()
             );
         
         /// <summary>

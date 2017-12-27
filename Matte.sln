@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Encoding.Fountain", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Encoding.Fountain.Tests", "Matte.Encoding.Fountain.Tests\Matte.Encoding.Fountain.Tests.csproj", "{82C63E47-DADF-4708-A320-B1141B15993E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Interfaces", "Matte.Interfaces\Matte.Interfaces.csproj", "{08346222-910F-4690-9BF0-A8241F3681E9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Lists", "Matte.Lists\Matte.Lists.csproj", "{6B57FD97-9E6B-42E1-B50A-32F541BC3548}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Lists.Tests", "Matte.Lists.Tests\Matte.Lists.Tests.csproj", "{B28BEFEE-3FF1-46F1-96EA-372492D7E28E}"
@@ -55,10 +53,6 @@ Global
 		{82C63E47-DADF-4708-A320-B1141B15993E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82C63E47-DADF-4708-A320-B1141B15993E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82C63E47-DADF-4708-A320-B1141B15993E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{08346222-910F-4690-9BF0-A8241F3681E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{08346222-910F-4690-9BF0-A8241F3681E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{08346222-910F-4690-9BF0-A8241F3681E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{08346222-910F-4690-9BF0-A8241F3681E9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6B57FD97-9E6B-42E1-B50A-32F541BC3548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6B57FD97-9E6B-42E1-B50A-32F541BC3548}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B57FD97-9E6B-42E1-B50A-32F541BC3548}.Release|Any CPU.ActiveCfg = Release|Any CPU

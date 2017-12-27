@@ -17,7 +17,7 @@
         /// <summary>
         /// The list of coefficients that is used by Gaussian Elimination to solve things.
         /// </summary>
-        private readonly IList<Packed> _coefficientsList = new List<Packed>();
+        private readonly IList<long[]> _coefficientsList = new List<long[]>();
 
         /// <summary>
         /// The number of coefficients per <see cref="Slice"/>.
@@ -32,7 +32,7 @@
         /// <summary>
         /// The list of equation solutions that is used by Gaussian Elimination to solve things.
         /// </summary>
-        private readonly IList<Packed> _solutionsList = new List<Packed>();
+        private readonly IList<long[]> _solutionsList = new List<long[]>();
         
         /// <summary>
         /// The length of the original data that was encoded into <see cref="Slice"/>s.
@@ -68,7 +68,7 @@
         private static void Swap(
             int from,
             int to,
-            IList<Packed> solutions)
+            IList<long[]> solutions)
         {
             if (from >= solutions.Count || to >= solutions.Count)
                 return;
@@ -131,7 +131,7 @@
         private static void Xor(
             int from,
             int to,
-            IList<Packed> solutions)
+            IList<long[]> solutions)
         {
             if (from >= solutions.Count || to >= solutions.Count)
                 return;

@@ -14,7 +14,6 @@
     <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Bits</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Matte.Interfaces\Matte.Interfaces.csproj" />
     <ProjectReference Include="..\Matte.Lists\Matte.Lists.csproj" />
   </ItemGroup>
   <ItemGroup>
