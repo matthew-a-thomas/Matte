@@ -1,58 +1,55 @@
 ﻿namespace Matte.Encoding.Fountain.Tests
 {
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
 
-    [TestClass]
     public class SliceExtensionsClass
     {
-        [TestClass]
         public class MixMethod
         {
-            [TestMethod]
+            [Fact]
             public void ClonesASingleSlice()
             {
                 var slice = SliceHelpers.CreateSlice(coefficients: new bool[5], data: new byte[5]);
                 var sequence = new [] { slice };
                 var mixed = sequence.Mix();
-                Assert.AreEqual(5, mixed.GetCoefficients().Count());
-                Assert.AreEqual(5, mixed.GetData().Count());
+                Assert.Equal(5, mixed.GetCoefficients().Count());
+                Assert.Equal(5, mixed.GetData().Count());
             }
         }
         
-        [TestClass]
         public class ToSlicesMethod
         {
-            [TestMethod]
+            [Fact]
             public void CreatesOnlyOneSliceWhenSliceSizeIsLargerThanDataLength()
             {
                 var data = new byte[5];
                 var slices = data.ToSlices(10).ToList();
-                Assert.AreEqual(slices.Count, 1);
-                Assert.AreEqual(slices.Count, slices[0].GetCoefficients().Count());
-                Assert.AreEqual(10, slices[0].GetData().Count());
+                Assert.Equal(slices.Count, 1);
+                Assert.Equal(slices.Count, slices[0].GetCoefficients().Count());
+                Assert.Equal(10, slices[0].GetData().Count());
             }
             
-            [TestMethod]
+            [Fact]
             public void CreatesOnlyOneSliceWhenSliceSizeIsSameAsDataLength()
             {
                 var data = new byte[5];
                 var slices = data.ToSlices(5).ToList();
-                Assert.AreEqual(slices.Count, 1);
-                Assert.AreEqual(slices.Count, slices[0].GetCoefficients().Count());
-                Assert.AreEqual(5, slices[0].GetData().Count());
+                Assert.Equal(slices.Count, 1);
+                Assert.Equal(slices.Count, slices[0].GetCoefficients().Count());
+                Assert.Equal(5, slices[0].GetData().Count());
             }
             
-            [TestMethod]
+            [Fact]
             public void CreatesTwoSlicesWhenSliceSizeIsSlightlySmallerThanDataLength()
             {
                 var data = new byte[5];
                 var slices = data.ToSlices(4).ToList();
-                Assert.AreEqual(slices.Count, 2);
-                Assert.AreEqual(slices.Count, slices[0].GetCoefficients().Count());
-                Assert.AreEqual(4, slices[0].GetData().Count());
-                Assert.AreEqual(slices.Count, slices[1].GetCoefficients().Count());
-                Assert.AreEqual(4, slices[1].GetData().Count());
+                Assert.Equal(slices.Count, 2);
+                Assert.Equal(slices.Count, slices[0].GetCoefficients().Count());
+                Assert.Equal(4, slices[0].GetData().Count());
+                Assert.Equal(slices.Count, slices[1].GetCoefficients().Count());
+                Assert.Equal(4, slices[1].GetData().Count());
             }
         }
     }

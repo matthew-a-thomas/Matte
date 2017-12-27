@@ -4,12 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using Bits;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
 
-    [TestClass]
     public class GaussianEliminationHelpersClass
     {
-        [TestClass]
         public class SolveMethod
         {
             private static void AssertIsSolved(
@@ -20,19 +18,19 @@
                 {
                     for (var j = 0; j < width; ++j)
                     {
-                        Assert.AreEqual(i == j, list[i].GetBit(width, j));
+                        Assert.Equal(i == j, list[i].GetBit(width, j));
                     }
                 }
             }
 
-            [TestMethod]
+            [Fact]
             public void CanBeCalledWithoutEquations()
             {
                 // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
                 GaussianEliminationHelpers.Solve(new List<long[]>(), 1).ToList();
             }
 
-            [TestMethod]
+            [Fact]
             public void DoesNotSolveUnsolvableSystem()
             {
                 var coefficients = new List<long[]>
@@ -42,10 +40,10 @@
                 var solution = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
 
                 if (solution.Count > 0)
-                    Assert.IsTrue(solution[solution.Count].Operation != Operation.Complete);
+                    Assert.True(solution[solution.Count].Operation != Operation.Complete);
             }
 
-            [TestMethod]
+            [Fact]
             public void ProducesStepsWhichResultInIdenticalChangesAndASolution()
             {
                 var coefficients = new List<long[]>
@@ -59,8 +57,8 @@
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
                 
                 // Assert that it has been solved
-                Assert.IsTrue(steps.Count > 0);
-                Assert.AreEqual(Operation.Complete, steps[steps.Count - 1].Operation);
+                Assert.True(steps.Count > 0);
+                Assert.Equal(Operation.Complete, steps[steps.Count - 1].Operation);
                 AssertIsSolved(coefficients, 3);
                 
                 // Perform the steps on the copy
@@ -91,7 +89,7 @@
                 AssertIsSolved(copy, 3);
             }
 
-            [TestMethod]
+            [Fact]
             public void SolvesAlreadySolvedSystem()
             {
                 var coefficients = new List<long[]>
@@ -101,12 +99,12 @@
                     new[] { false, false, true }.ToLongs()
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
-                Assert.IsTrue(steps.Count > 0);
-                Assert.AreEqual(Operation.Complete, steps[steps.Count - 1].Operation);
+                Assert.True(steps.Count > 0);
+                Assert.Equal(Operation.Complete, steps[steps.Count - 1].Operation);
                 AssertIsSolved(coefficients, 3);
             }
 
-            [TestMethod]
+            [Fact]
             public void SolvesEasilySolvableSystem()
             {
                 var coefficients = new List<long[]>
@@ -116,12 +114,12 @@
                     new[] { true, false, false }.ToLongs()
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
-                Assert.IsTrue(steps.Count > 0);
-                Assert.AreEqual(Operation.Complete, steps[steps.Count - 1].Operation);
+                Assert.True(steps.Count > 0);
+                Assert.Equal(Operation.Complete, steps[steps.Count - 1].Operation);
                 AssertIsSolved(coefficients, 3);
             }
 
-            [TestMethod]
+            [Fact]
             public void SolvesComplicatedSystem()
             {
                 var coefficients = new List<long[]>
@@ -131,12 +129,12 @@
                     new[] {false, false, true}.ToLongs()
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
-                Assert.IsTrue(steps.Count > 0);
-                Assert.AreEqual(Operation.Complete, steps[steps.Count - 1].Operation);
+                Assert.True(steps.Count > 0);
+                Assert.Equal(Operation.Complete, steps[steps.Count - 1].Operation);
                 AssertIsSolved(coefficients, 3);
             }
 
-            [TestMethod]
+            [Fact]
             public void SolvesOverlySolvedSystem()
             {
                 var coefficients = new List<long[]>
@@ -149,8 +147,8 @@
                     new[] { true, false, false }.ToLongs()
                 };
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
-                Assert.IsTrue(steps.Count > 0);
-                Assert.AreEqual(Operation.Complete, steps[steps.Count - 1].Operation);
+                Assert.True(steps.Count > 0);
+                Assert.Equal(Operation.Complete, steps[steps.Count - 1].Operation);
                 AssertIsSolved(coefficients, 3);
             }
         }

@@ -1,15 +1,13 @@
 ﻿namespace Matte.Lists.Tests
 {
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
 
-    [TestClass]
     public class ListExtensionsClass
     {
-        [TestClass]
         public class CombineIntoMethod
         {
-            [TestMethod]
+            [Fact]
             public void Combines()
             {
                 var from = new byte[]
@@ -25,7 +23,7 @@
                     0x01
                 };
                 from.CombineInto(into, (x, y) => (byte)(x ^ y));
-                Assert.IsTrue(into.SequenceEqual(new byte[] { 0x11, 0x11, 0x11 }));
+                Assert.True(into.SequenceEqual(new byte[] { 0x11, 0x11, 0x11 }));
             }
         }
     }

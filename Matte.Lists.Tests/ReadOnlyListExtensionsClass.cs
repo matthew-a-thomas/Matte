@@ -1,15 +1,13 @@
 namespace Matte.Lists.Tests
 {
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
 
-    [TestClass]
     public class ReadOnlyListExtensionsClass
     {
-        [TestClass]
         public class PickMethod
         {
-            [TestMethod]
+            [Fact]
             public void PicksOneOutOfAList()
             {
                 var list = new byte[]
@@ -20,7 +18,7 @@ namespace Matte.Lists.Tests
                     0x03
                 };
                 var picked = list.Pick(new [] { false, true }).ToList();
-                Assert.IsTrue(picked.SequenceEqual(new [] { list[1] }));
+                Assert.True(picked.SequenceEqual(new [] { list[1] }));
             }
         }
     }

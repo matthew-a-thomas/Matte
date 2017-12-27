@@ -4,17 +4,15 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Matt.Random.Adapters;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
 
-    [TestClass]
     public class SliceHelpersClass
     {
-        [TestClass]
         [SuppressMessage("ReSharper",
             "RedundantArgumentDefaultValue")]
         public class CreateGeneratorMethod
         {
-            [TestMethod]
+            [Fact]
             public void CanBeSystematic()
             {
                 var data = new byte[]
@@ -41,17 +39,17 @@
                         .Append(true)
                         .Concat(Enumerable.Repeat(false, data.Length - index - 1))
                         .ToList();
-                    Assert.IsTrue(slice.GetCoefficients().SequenceEqual(expectedCoefficients));
+                    Assert.True(slice.GetCoefficients().SequenceEqual(expectedCoefficients));
                     
                     // Verify data
                     var sliceData = slice.GetData().ToList();
-                    Assert.AreEqual(sliceData.Count, 1);
-                    Assert.AreEqual(sliceData[0], data[index]);
+                    Assert.Equal(sliceData.Count, 1);
+                    Assert.Equal(sliceData[0], data[index]);
                 }
             }
             
             // TODO: This test feels like it's testing too much and making too many assumptions.
-            [TestMethod]
+            [Fact]
             public void ProducesSolvableSequenceAfterSystematicSection()
             {
                 var data = new byte[]
@@ -75,9 +73,9 @@
                 foreach (var slice in mixedSection)
                     solver.Remember(slice);
                 var solved = solver.TrySolve(out var solution);
-                Assert.IsTrue(solved);
-                Assert.IsNotNull(solution);
-                Assert.IsTrue(solution.SequenceEqual(data));
+                Assert.True(solved);
+                Assert.NotNull(solution);
+                Assert.True(solution.SequenceEqual(data));
             }
         }
     }

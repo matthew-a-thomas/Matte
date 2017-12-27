@@ -1,15 +1,13 @@
 ﻿namespace Matte.Lists.Tests
 {
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
 
-    [TestClass]
     public class EnumerableExtensionsClass
     {
-        [TestClass]
         public class BufferMethod
         {
-            [TestMethod]
+            [Fact]
             public void MakesSmallChunkWhenCountDoesNotEvenlyDivide()
             {
                 var data = new byte[]
@@ -21,12 +19,12 @@
                 };
                 var buffers = data.Buffer(3)
                     .ToList();
-                Assert.AreEqual(2, buffers.Count);
-                Assert.IsTrue(buffers[0].Length == 3);
-                Assert.IsTrue(buffers[1].Length == 1);
+                Assert.Equal(2, buffers.Count);
+                Assert.True(buffers[0].Length == 3);
+                Assert.True(buffers[1].Length == 1);
             }
 
-            [TestMethod]
+            [Fact]
             public void CanBufferSizeOne()
             {
                 var data = new byte[]
@@ -37,9 +35,9 @@
                     0x03
                 };
                 var buffers = data.Buffer(1).ToList();
-                Assert.AreEqual(data.Length, buffers.Count);
-                Assert.IsTrue(buffers.All(x => x.Length == 1));
-                Assert.IsTrue(buffers.Select(x => x[0]).SequenceEqual(data));
+                Assert.Equal(data.Length, buffers.Count);
+                Assert.True(buffers.All(x => x.Length == 1));
+                Assert.True(buffers.Select(x => x[0]).SequenceEqual(data));
             }
         }
     }

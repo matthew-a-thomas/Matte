@@ -1,12 +1,11 @@
 ﻿namespace Matte.Encoding.Fountain.Tests
 {
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
 
-    [TestClass]
     public class SliceSolverClass
     {
-        [TestMethod]
+        [Fact]
         public void CanSolveWithACombinedSlice()
         {
             const byte
@@ -23,23 +22,23 @@
             solver.Remember(slice1);
             solver.Remember(slice2);
             var solved = solver.TrySolve(out var solution);
-            Assert.IsTrue(solved, "Didn't find a solution");
-            Assert.IsNotNull(solution, "Didn't find a solution");
-            Assert.AreEqual(solution.Length, 2, $"Found a solution of {solution.Length} bytes, instead of 2 bytes");
-            Assert.AreEqual(solution[0], value1, $"Found the wrong first byte: {solution[0]} instead of {value1}");
-            Assert.AreEqual(solution[1], value2, $"Found the wrong second byte: {solution[1]} instead of {value2}");
+            Assert.True(solved);
+            Assert.NotNull(solution);
+            Assert.Equal(solution.Length, 2);
+            Assert.Equal(solution[0], value1);
+            Assert.Equal(solution[1], value2);
         }
         
-        [TestMethod]
+        [Fact]
         public void DoesNotSolvePrematurely()
         {
             var solver = new SliceSolver(1, 1);
             var solved = solver.TrySolve(out var solution);
-            Assert.IsFalse(solved, "It created a solution from nothing");
-            Assert.IsNull(solution, "It created a solution from nothing");
+            Assert.False(solved);
+            Assert.Null(solution);
         }
         
-        [TestMethod]
+        [Fact]
         public void PutsOneByteBackTogether()
         {
             const byte value = 0xF5;
@@ -50,13 +49,13 @@
             var solver = new SliceSolver(1, 1);
             solver.Remember(slice);
             var solved = solver.TrySolve(out var solution);
-            Assert.IsTrue(solved, "Didn't find a solution");
-            Assert.IsNotNull(solution, "Didn't find a solution");
-            Assert.AreEqual(solution.Length, 1, $"Found a solution of {solution.Length} bytes, instead of 1 byte");
-            Assert.AreEqual(solution[0], value, $"Found the wrong solution: {solution[0]} instead of {value}");
+            Assert.True(solved);
+            Assert.NotNull(solution);
+            Assert.Equal(solution.Length, 1);
+            Assert.Equal(solution[0], value);
         }
         
-        [TestMethod]
+        [Fact]
         public void PutsTwoSequentialSlicesBackTogether()
         {
             const byte
@@ -73,14 +72,14 @@
             solver.Remember(slice1);
             solver.Remember(slice2);
             var solved = solver.TrySolve(out var solution);
-            Assert.IsTrue(solved, "Didn't find a solution");
-            Assert.IsNotNull(solution, "Didn't find a solution");
-            Assert.AreEqual(solution.Length, 2, $"Found a solution of {solution.Length} bytes, instead of 2 bytes");
-            Assert.AreEqual(solution[0], value1, $"Found the wrong first byte: {solution[0]} instead of {value1}");
-            Assert.AreEqual(solution[1], value2, $"Found the wrong second byte: {solution[1]} instead of {value2}");
+            Assert.True(solved);
+            Assert.NotNull(solution);
+            Assert.Equal(solution.Length, 2);
+            Assert.Equal(solution[0], value1);
+            Assert.Equal(solution[1], value2);
         }
         
-        [TestMethod]
+        [Fact]
         public void WorksEvenWhenSliceSizeAndNumberOfSlicesDoNotEvenlyDivideData()
         {
             var originalData = new []
@@ -102,10 +101,10 @@
             solver.Remember(slice2);
             solver.Remember(slice1);
             var solved = solver.TrySolve(out var solution);
-            Assert.IsTrue(solved, "Didn't find a solution");
-            Assert.IsNotNull(solution, "Didn't find a solution");
-            Assert.AreEqual(solution.Length, 3, $"Found a solution of {solution.Length} bytes, instead of 3 bytes");
-            Assert.IsTrue(solution.SequenceEqual(originalData), "Found different solution than original data");
+            Assert.True(solved);
+            Assert.NotNull(solution);
+            Assert.Equal(solution.Length, 3);
+            Assert.True(solution.SequenceEqual(originalData));
         }
     }
 }
