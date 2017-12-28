@@ -1,4 +1,4 @@
-﻿namespace Matte.Manifests
+﻿namespace Matte.Common.Manifests
 {
     using System;
 

@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Math.Linear.Solving",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Math.Linear.Solving.Tests", "Matte.Math.Linear.Solving.Tests\Matte.Math.Linear.Solving.Tests.csproj", "{D5040D78-42AC-4880-8F78-CD0D0326D885}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Client", "Matte.Client\Matte.Client.csproj", "{92D0C5D6-4572-4B22-BD15-4D9C7C1F69F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Common", "Matte.Common\Matte.Common.csproj", "{047E754C-6AF8-4112-AA4B-CE40400729C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{D5040D78-42AC-4880-8F78-CD0D0326D885}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5040D78-42AC-4880-8F78-CD0D0326D885}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5040D78-42AC-4880-8F78-CD0D0326D885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D0C5D6-4572-4B22-BD15-4D9C7C1F69F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D0C5D6-4572-4B22-BD15-4D9C7C1F69F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D0C5D6-4572-4B22-BD15-4D9C7C1F69F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D0C5D6-4572-4B22-BD15-4D9C7C1F69F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{047E754C-6AF8-4112-AA4B-CE40400729C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{047E754C-6AF8-4112-AA4B-CE40400729C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{047E754C-6AF8-4112-AA4B-CE40400729C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{047E754C-6AF8-4112-AA4B-CE40400729C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
