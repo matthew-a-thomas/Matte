@@ -15,7 +15,7 @@
             {
                 var bits = new[] {true, false, true};
                 var longs = bits.ToLongs();
-                Assert.Equal(1, longs.Length);
+                Assert.Single(longs);
                 Assert.Equal(5, longs[0]);
             }
 
@@ -24,7 +24,7 @@
             {
                 var bits = new[] {true, false};
                 var longs = bits.ToLongs();
-                Assert.Equal(1, longs.Length);
+                Assert.Single(longs);
                 Assert.Equal(2, longs[0]);
             }
 
@@ -51,7 +51,7 @@
             {
                 var bytes = new byte[] {0x1};
                 var longs = bytes.ToLongs();
-                Assert.Equal(1, longs.Length);
+                Assert.Single(longs);
                 Assert.Equal(1, longs[0]);
             }
 
@@ -60,7 +60,7 @@
             {
                 var bytes = new byte[] { 0x05, 0xFF };
                 var longs = bytes.ToLongs();
-                Assert.Equal(1, longs.Length);
+                Assert.Single(longs);
                 Assert.Equal(1535, longs[0]);
             }
 

@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Matte.Client.Nodes;
-    using Matte.Common.Manifests;
+    using Nodes;
+    using Common.Manifests;
 
     /// <summary>
     /// Coordinates <see cref="INode"/>s and <see cref="Manifest"/>s.

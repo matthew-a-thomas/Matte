@@ -25,7 +25,7 @@
             {
                 var data = new byte[5];
                 var slices = data.ToSlices(10).ToList();
-                Assert.Equal(slices.Count, 1);
+                Assert.Single(slices);
                 Assert.Equal(slices.Count, slices[0].GetCoefficients().Count());
                 Assert.Equal(10, slices[0].GetData().Count());
             }
@@ -35,7 +35,7 @@
             {
                 var data = new byte[5];
                 var slices = data.ToSlices(5).ToList();
-                Assert.Equal(slices.Count, 1);
+                Assert.Single(slices);
                 Assert.Equal(slices.Count, slices[0].GetCoefficients().Count());
                 Assert.Equal(5, slices[0].GetData().Count());
             }
@@ -45,7 +45,7 @@
             {
                 var data = new byte[5];
                 var slices = data.ToSlices(4).ToList();
-                Assert.Equal(slices.Count, 2);
+                Assert.Equal(2, slices.Count);
                 Assert.Equal(slices.Count, slices[0].GetCoefficients().Count());
                 Assert.Equal(4, slices[0].GetData().Count());
                 Assert.Equal(slices.Count, slices[1].GetCoefficients().Count());

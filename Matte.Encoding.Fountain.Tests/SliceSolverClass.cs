@@ -24,7 +24,7 @@
             var solved = solver.TrySolve(out var solution);
             Assert.True(solved);
             Assert.NotNull(solution);
-            Assert.Equal(solution.Length, 2);
+            Assert.Equal(2, solution.Length);
             Assert.Equal(solution[0], value1);
             Assert.Equal(solution[1], value2);
         }
@@ -51,7 +51,7 @@
             var solved = solver.TrySolve(out var solution);
             Assert.True(solved);
             Assert.NotNull(solution);
-            Assert.Equal(solution.Length, 1);
+            Assert.Single(solution);
             Assert.Equal(solution[0], value);
         }
         
@@ -74,7 +74,7 @@
             var solved = solver.TrySolve(out var solution);
             Assert.True(solved);
             Assert.NotNull(solution);
-            Assert.Equal(solution.Length, 2);
+            Assert.Equal(2, solution.Length);
             Assert.Equal(solution[0], value1);
             Assert.Equal(solution[1], value2);
         }
@@ -103,7 +103,7 @@
             var solved = solver.TrySolve(out var solution);
             Assert.True(solved);
             Assert.NotNull(solution);
-            Assert.Equal(solution.Length, 3);
+            Assert.Equal(3, solution.Length);
             Assert.True(solution.SequenceEqual(originalData));
         }
     }

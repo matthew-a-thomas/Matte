@@ -2,7 +2,7 @@
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Matte.Bits;
+    using Bits;
 
     /// <summary>
     /// Encapsulates coefficients and data in a way that allows fast bitwise XOR operations.

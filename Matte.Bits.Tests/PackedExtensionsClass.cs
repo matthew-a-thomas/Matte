@@ -8,7 +8,7 @@
         public class GetBitMethod
         {
             [Fact]
-            public void GetsLastFourBitsOfPacked0xF()
+            public void GetsLastFourBitsOfPacked0Xf()
             {
                 var packed = new long[] {0xF};
                 for (var i = 0; i < 4; ++i)

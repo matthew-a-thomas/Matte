@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Matte.Common.Slices;
+    using Common.Slices;
 
     /// <summary>
     /// Holds <see cref="Slice"/>s.

@@ -43,7 +43,7 @@
                     
                     // Verify data
                     var sliceData = slice.GetData().ToList();
-                    Assert.Equal(sliceData.Count, 1);
+                    Assert.Single(sliceData);
                     Assert.Equal(sliceData[0], data[index]);
                 }
             }
