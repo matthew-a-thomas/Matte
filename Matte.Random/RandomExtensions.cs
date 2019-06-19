@@ -1,11 +1,12 @@
-﻿namespace Matt.Random
+﻿using Matt.Bits;
+
+namespace Matte.Random
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Security.Cryptography;
     using Adapters;
-    using Bits;
 
     /// <summary>
     /// Extension methods for <see cref="IRandom"/>.

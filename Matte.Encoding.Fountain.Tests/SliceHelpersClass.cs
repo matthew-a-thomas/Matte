@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Matt.Random.Adapters;
+    using Random.Adapters;
     using Xunit;
 
     public class SliceHelpersClass

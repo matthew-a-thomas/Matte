@@ -1,17 +1,17 @@
-﻿namespace Matt.Random.Adapters
+﻿namespace Matte.Random.Adapters
 {
     using System.Security.Cryptography;
 
     /// <inheritdoc />
     /// <summary>
-    /// Adapts a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> into an <see cref="T:Matt.Random.IRandom" />.
+    /// Adapts a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> into an <see cref="T:Matte.Random.IRandom" />.
     /// </summary>
     public sealed class RandomNumberGeneratorAdapter : IRandom
     {
         private readonly RandomNumberGenerator _rng;
 
         /// <summary>
-        /// Adapts a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> into an <see cref="T:Matt.Random.IRandom" />.
+        /// Adapts a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> into an <see cref="T:Matte.Random.IRandom" />.
         /// </summary>
         public RandomNumberGeneratorAdapter(RandomNumberGenerator rng)
         {

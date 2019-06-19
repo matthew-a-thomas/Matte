@@ -6,7 +6,7 @@
     using System.Linq;
     using Bits;
     using Lists;
-    using Matt.Random;
+    using Random;
 
     /// <summary>
     /// Static helper methods for <see cref="Slice"/>s.

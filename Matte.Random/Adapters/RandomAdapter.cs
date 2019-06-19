@@ -1,17 +1,17 @@
-﻿namespace Matt.Random.Adapters
+﻿namespace Matte.Random.Adapters
 {
     using System;
 
     /// <inheritdoc />
     /// <summary>
-    /// Adapts a <see cref="T:System.Random" /> into an <see cref="T:Matt.Random.IRandom" />.
+    /// Adapts a <see cref="T:System.Random" /> into an <see cref="T:Matte.Random.IRandom" />.
     /// </summary>
     public sealed class RandomAdapter : IRandom
     {
         private readonly Random _random;
 
         /// <summary>
-        /// Adapts a <see cref="T:System.Random" /> into an <see cref="T:Matt.Random.IRandom" />.
+        /// Adapts a <see cref="T:System.Random" /> into an <see cref="T:Matte.Random.IRandom" />.
         /// </summary>
         public RandomAdapter(Random random)
         {

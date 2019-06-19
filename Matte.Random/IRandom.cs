@@ -1,4 +1,4 @@
-﻿namespace Matt.Random
+﻿namespace Matte.Random
 {
     /// <summary>
     /// Populates arrays with random bytes in a non-thread-safe way.

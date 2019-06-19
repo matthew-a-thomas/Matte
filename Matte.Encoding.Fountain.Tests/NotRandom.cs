@@ -1,6 +1,6 @@
 ﻿namespace Matte.Encoding.Fountain.Tests
 {
-    using Matt.Random;
+    using Random;
 
     internal sealed class NotRandom : IRandom
     {

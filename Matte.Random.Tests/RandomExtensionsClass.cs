@@ -1,4 +1,4 @@
-﻿namespace Matt.Random.Tests
+﻿namespace Matte.Random.Tests
 {
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
