@@ -11,7 +11,7 @@
         /// Packs these <paramref name="bits"/> into the fewest number of <see cref="long"/>s needed to store them.
         /// </summary>
         /// <remarks>
-        /// The last bit in these <see cref="bits"/> will be the least significant bit of the last <see cref="long"/>
+        /// The last bit in these <paramref name="bits"/>/> will be the least significant bit of the last <see cref="long"/>
         /// returned from this method.
         /// </remarks>
         public static long[] ToLongs(
@@ -35,7 +35,7 @@
         /// Packs these <paramref name="bytes"/> into the fewest number of <see cref="long"/>s needed to store them.
         /// </summary>
         /// <remarks>
-        /// The last <see cref="byte"/> in these <see cref="bytes"/> will be placed into the least significant section
+        /// The last <see cref="byte"/> in these <paramref name="bytes"/> will be placed into the least significant section
         /// of the last <see cref="long"/> returned from this method.
         /// </remarks>
         public static long[] ToLongs(

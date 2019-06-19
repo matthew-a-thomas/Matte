@@ -13,7 +13,4 @@
     <PackageProjectUrl>https://github.com/matthew-a-thomas/Matt.Lists</PackageProjectUrl>
     <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Lists</RepositoryUrl>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="NETStandard.Library" Version="2.0.1" />
-  </ItemGroup>
 </Project>

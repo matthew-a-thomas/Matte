@@ -14,9 +14,6 @@
     <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Encoding.Fountain</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="NETStandard.Library" Version="2.0.1" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Matte.Bits\Matte.Bits.csproj" />
     <ProjectReference Include="..\Matte.Math.Linear.Solving\Matte.Math.Linear.Solving.csproj" />
     <ProjectReference Include="..\Matte.Random\Matte.Random.csproj" />
