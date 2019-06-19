@@ -8,6 +8,18 @@
     public static class BitExtensions
     {
         /// <summary>
+        /// Converts this enumerable of bytes into an enumerable of bits.
+        /// </summary>
+        public static IEnumerable<bool> ToBits(this IEnumerable<byte> bytes)
+        {
+            foreach (var @byte in bytes)
+            {
+                for (byte shift = 0; shift < 8; ++shift)
+                    yield return ((@byte << shift) & 0x80) != 0;
+            }
+        }
+        
+        /// <summary>
         /// Packs these <paramref name="bits"/> into the fewest number of <see cref="long"/>s needed to store them.
         /// </summary>
         /// <remarks>
