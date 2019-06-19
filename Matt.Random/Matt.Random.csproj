@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Title>Matt.Random</Title>
+    <Description>Tools for random number generation.</Description>
+    <Copyright>2017 Matthew Thomas</Copyright>
+    <VersionPrefix>2.2.3</VersionPrefix>
+    <VersionSuffix/>
+    <Company />
+    <Authors>Matthew Thomas</Authors>
+    <PackageLicenseUrl>https://github.com/matthew-a-thomas/Matt.Random/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/matthew-a-thomas/Matt.Random</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/matthew-a-thomas/Matt.Random</RepositoryUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Matt.Bits" Version="1.0.0" />
+  </ItemGroup>
+</Project>
