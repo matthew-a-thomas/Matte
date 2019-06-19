@@ -79,5 +79,34 @@
                 Assert.Equal(1, longs[1]);
             }
         }
+        
+        public class ToBitsMethod
+        {
+            [Fact]
+            public void Converts0xF05CTo0b1111_0000_0101_1100()
+            {
+                var bytes = new byte[] { 0b1111_0000, 0b0101_1100 };
+                var bits = bytes.ToBits().ToList();
+                Assert.True(bits.SequenceEqual(new []
+                    {
+                        true, true, true, true,
+                        false, false, false, false,
+                        false, true, false, true,
+                        true, true, false, false
+                    }),
+                    string.Join(", ", bits.Select(x => x ? "1" : "0")));
+            }
+            
+            [Fact]
+            public void Converts0xFFTo0b1111_1111()
+            {
+                var bytes = new byte[] {0b1111_1111};
+                var bits = bytes.ToBits().ToList();
+                Assert.True(
+                    bits.SequenceEqual(Enumerable.Repeat(true, 8)),
+                    string.Join(", ", bits.Select(x => x ? "1" : "0"))
+                );
+            }
+        }
     }
 }
