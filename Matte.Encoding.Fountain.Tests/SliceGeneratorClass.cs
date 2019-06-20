@@ -26,9 +26,8 @@
                     };
                     var generator = new SliceGenerator(
                         isSystematic: true,
-                        random: new NotRandom(0),
-                        sliceSize: 1);
-                    var sequence = generator.Generate(data);
+                        random: new NotRandom(0));
+                    var sequence = generator.Generate(data, 1);
                     foreach (var tuple in sequence.Select((x, i) => (Slice: x, Index: i)).Take(data.Length))
                     {
                         var index = tuple.Index;
@@ -66,10 +65,9 @@
                     };
                     var generator = new SliceGenerator(
                         isSystematic: true,
-                        random: new RandomAdapter(new Random(0)),
-                        sliceSize: 2);
+                        random: new RandomAdapter(new Random(0)));
                     var mixedSection = generator
-                        .Generate(data)
+                        .Generate(data, 2)
                         .Skip(data.Length)
                         .Take(10)
                         .ToList();

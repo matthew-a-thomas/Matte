@@ -4,4 +4,11 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Matte.Encoding.Fountain\Matte.Encoding.Fountain.csproj" />
+    <ProjectReference Include="..\Matte.Random\Matte.Random.csproj" />
+  </ItemGroup>
 </Project>

@@ -12,7 +12,6 @@ namespace Matte.Encoding.Fountain
     {
         readonly bool _isSystematic;
         readonly IRandom _random;
-        readonly int _sliceSize;
 
         /// <summary>
         /// Creates a new <see cref="SliceGenerator"/>
@@ -21,12 +20,11 @@ namespace Matte.Encoding.Fountain
         /// Use true to make the resulting sequence start with <see cref="Slice"/>s of the data in order.
         /// </param>
         /// <param name="random">Source of entropy</param>
-        /// <param name="sliceSize">The number of bytes that will go into each slice</param>
-        public SliceGenerator(bool isSystematic, IRandom random, int sliceSize)
+
+        public SliceGenerator(bool isSystematic, IRandom random)
         {
             _isSystematic = isSystematic;
             _random = random;
-            _sliceSize = sliceSize;
         }
 
         /// // TODO: This function creates an expensive enumerable--can we use async? or Reactive?
@@ -35,11 +33,13 @@ namespace Matte.Encoding.Fountain
         /// <paramref name="data"/>
         /// </summary>
         /// <param name="data">The data which will get cloned and mixed in the resulting sequence</param>
+        /// <param name="sliceSize">The number of bytes that will go into each slice</param>
         public IEnumerable<Slice> Generate(
-            byte[] data)
+            byte[] data,
+            int sliceSize)
         {
             // Split up the given data into slices of the right size
-            var sourceSlices = data.ToSlices(_sliceSize).ToList();
+            var sourceSlices = data.ToSlices(sliceSize).ToList();
 
             var result = Enumerable.Concat(
                 // Start with the source slices themselves if this is a systematic generator
