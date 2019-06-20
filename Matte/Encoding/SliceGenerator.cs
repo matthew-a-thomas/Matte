@@ -2,6 +2,7 @@ namespace Matte.Encoding
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Matte.Entropy;
     using Matte.Lists;
@@ -27,13 +28,14 @@ namespace Matte.Encoding
             _randomFactory = randomFactory;
         }
 
-        /// // TODO: This function creates an expensive enumerable--can we use async? or Reactive?
         /// <summary>
         /// Generates an endless sequence of <see cref="Slice"/>s, each of which is a specific combination of the
         /// <paramref name="data"/>
         /// </summary>
         /// <param name="data">The data which will get cloned and mixed in the resulting sequence</param>
         /// <param name="sliceSize">The number of bytes that will go into each slice</param>
+        [SuppressMessage("ReSharper",
+            "InvokeAsExtensionMethod")]
         public IEnumerable<Slice> Generate(
             byte[] data,
             int sliceSize)
@@ -41,8 +43,7 @@ namespace Matte.Encoding
             using (var random = _randomFactory())
             {
                 // Split up the given data into slices of the right size
-                var sourceSlices = data.ToSlices(sliceSize)
-                    .ToList();
+                var sourceSlices = data.ToSlices(sliceSize);
 
                 var result = Enumerable.Concat(
                     // Start with the source slices themselves if this is a systematic generator
@@ -53,7 +54,7 @@ namespace Matte.Encoding
                     // Then follow that up with a never-ending stream of randomly-mixed slices
                     random
                         .ToEndlessBitSequence()
-                        .Buffer(sourceSlices.Count)
+                        .Buffer(sourceSlices.Length)
                         .Where(buffer => buffer.Any(x => x))
                         .Select(sourceSlices.Pick)
                         .Select(x => x.Mix())

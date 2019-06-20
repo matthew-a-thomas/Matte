@@ -52,11 +52,12 @@
         /// Splits the given <paramref name="data"/> up into as many <see cref="Slice"/>s as needed to have slices of
         /// size <paramref name="sliceSize"/>.
         /// </summary>
-        public static IEnumerable<Slice> ToSlices(
+        public static Slice[] ToSlices(
             this byte[] data,
             int sliceSize)
         {
             var numSlices = (data.Length - 1) / sliceSize + 1;
+            var result = new Slice[numSlices];
             for (var i = 0; i < numSlices; ++i)
             {
                 var coefficients = new bool[numSlices];
@@ -74,8 +75,10 @@
                     coefficients: coefficients,
                     data: sliceData
                 );
-                yield return slice;
+                result[i] = slice;
             }
+
+            return result;
         }
     }
 }
