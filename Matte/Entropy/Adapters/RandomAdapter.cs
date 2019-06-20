@@ -13,20 +13,20 @@
         /// <summary>
         /// Adapts a <see cref="T:System.Random" /> into an <see cref="T:Matte.Entropy.IRandom" />.
         /// </summary>
-        public RandomAdapter(Random random)
+        public RandomAdapter(
+            int bufferSize,
+            Random random)
         {
+            Buffer = new byte[bufferSize];
             _random = random;
         }
 
+        void IDisposable.Dispose() {}
+
         /// <inheritdoc />
-        public void Populate(
-            byte[] buffer,
-            int offset,
-            int count)
-        {
-            var temp = new byte[count];
-            _random.NextBytes(temp);
-            temp.CopyTo(buffer, offset);
-        }
+        public byte[] Buffer { get; }
+
+        /// <inheritdoc />
+        public void Populate() => _random.NextBytes(Buffer);
     }
 }

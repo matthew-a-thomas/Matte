@@ -4,7 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Matte.Encoding;
-    using Matte.Entropy.Adapters;
+    using Matte.Entropy;
     using Xunit;
 
     public class SliceGeneratorClass
@@ -27,7 +27,7 @@
                     };
                     var generator = new SliceGenerator(
                         isSystematic: true,
-                        random: new NotRandom(0));
+                        randomFactory: () => new NotRandom(new byte[] { 0 }));
                     var sequence = generator.Generate(data, 1);
                     foreach (var tuple in sequence.Select((x, i) => (Slice: x, Index: i)).Take(data.Length))
                     {
@@ -66,7 +66,7 @@
                     };
                     var generator = new SliceGenerator(
                         isSystematic: true,
-                        random: new RandomAdapter(new Random(0)));
+                        randomFactory: () => new Random(0).AsRandom(4));
                     var mixedSection = generator
                         .Generate(data, 2)
                         .Skip(data.Length)

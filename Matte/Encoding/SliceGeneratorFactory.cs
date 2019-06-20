@@ -24,10 +24,9 @@ namespace Matte.Encoding
         /// </summary>
         public SliceGenerator CreateSystematic()
         {
-            var random = _randomFactory();
             var generator = new SliceGenerator(
                 isSystematic: true,
-                random: random);
+                randomFactory: _randomFactory);
             return generator;
         }
     }

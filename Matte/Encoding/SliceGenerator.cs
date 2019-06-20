@@ -1,5 +1,6 @@
 namespace Matte.Encoding
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Matte.Entropy;
@@ -11,7 +12,7 @@ namespace Matte.Encoding
     public class SliceGenerator
     {
         readonly bool _isSystematic;
-        readonly IRandom _random;
+        readonly Func<IRandom> _randomFactory;
 
         /// <summary>
         /// Creates a new <see cref="SliceGenerator"/>
@@ -19,12 +20,11 @@ namespace Matte.Encoding
         /// <param name="isSystematic">
         /// Use true to make the resulting sequence start with <see cref="Slice"/>s of the data in order.
         /// </param>
-        /// <param name="random">Source of entropy</param>
-
-        public SliceGenerator(bool isSystematic, IRandom random)
+        /// <param name="randomFactory">Source of entropy</param>
+        public SliceGenerator(bool isSystematic, Func<IRandom> randomFactory)
         {
             _isSystematic = isSystematic;
-            _random = random;
+            _randomFactory = randomFactory;
         }
 
         /// // TODO: This function creates an expensive enumerable--can we use async? or Reactive?
@@ -38,25 +38,30 @@ namespace Matte.Encoding
             byte[] data,
             int sliceSize)
         {
-            // Split up the given data into slices of the right size
-            var sourceSlices = data.ToSlices(sliceSize).ToList();
+            using (var random = _randomFactory())
+            {
+                // Split up the given data into slices of the right size
+                var sourceSlices = data.ToSlices(sliceSize)
+                    .ToList();
 
-            var result = Enumerable.Concat(
-                // Start with the source slices themselves if this is a systematic generator
-                _isSystematic
-                    ? sourceSlices
-                    : Enumerable.Empty<Slice>(),
+                var result = Enumerable.Concat(
+                    // Start with the source slices themselves if this is a systematic generator
+                    _isSystematic
+                        ? sourceSlices
+                        : Enumerable.Empty<Slice>(),
 
-                // Then follow that up with a never-ending stream of randomly-mixed slices
-                _random
-                    .ToEndlessBitSequence()
-                    .Buffer(sourceSlices.Count)
-                    .Where(buffer => buffer.Any(x => x))
-                    .Select(sourceSlices.Pick)
-                    .Select(x => x.Mix())
-            );
+                    // Then follow that up with a never-ending stream of randomly-mixed slices
+                    random
+                        .ToEndlessBitSequence()
+                        .Buffer(sourceSlices.Count)
+                        .Where(buffer => buffer.Any(x => x))
+                        .Select(sourceSlices.Pick)
+                        .Select(x => x.Mix())
+                );
 
-            return result;
+                foreach (var element in result)
+                    yield return element;
+            }
         }
     }
 }

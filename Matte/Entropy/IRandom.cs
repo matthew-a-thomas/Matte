@@ -1,16 +1,23 @@
 ﻿namespace Matte.Entropy
 {
+    using System;
+
     /// <summary>
-    /// Populates arrays with random bytes in a non-thread-safe way.
+    /// Populates arrays with random bytes
     /// </summary>
-    public interface IRandom
+    public interface IRandom : IDisposable
     {
         /// <summary>
-        /// Populates the given array with random bytes in a non-thread-safe way.
+        /// An array of random bytes
         /// </summary>
-        void Populate(
-            byte[] buffer,
-            int offset,
-            int count);
+        /// <remarks>
+        /// Make sure you call <see cref="Populate"/> before extracting entropy from here
+        /// </remarks>
+        byte[] Buffer { get; }
+        
+        /// <summary>
+        /// Populates the <see cref="Buffer"/> with random bytes
+        /// </summary>
+        void Populate();
     }
 }

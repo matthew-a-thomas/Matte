@@ -10,19 +10,26 @@
     {
         readonly RandomNumberGenerator _rng;
 
+        /// <inheritdoc />
+        public byte[] Buffer { get; }
+        
         /// <summary>
         /// Adapts a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> into an <see cref="T:Matte.Entropy.IRandom" />.
         /// </summary>
-        public RandomNumberGeneratorAdapter(RandomNumberGenerator rng)
+        public RandomNumberGeneratorAdapter(
+            int bufferSize,
+            RandomNumberGenerator rng)
         {
+            Buffer = new byte[bufferSize];
             _rng = rng;
         }
 
+        /// <summary>
+        /// Disposes of the underlying <see cref="RandomNumberGenerator"/>
+        /// </summary>
+        public void Dispose() => _rng.Dispose();
+
         /// <inheritdoc />
-        public void Populate(
-            byte[] buffer,
-            int offset,
-            int count) =>
-            _rng.GetBytes(buffer, offset, count);
+        public void Populate() => _rng.GetBytes(Buffer);
     }
 }

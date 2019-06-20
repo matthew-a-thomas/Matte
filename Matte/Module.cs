@@ -5,7 +5,6 @@ namespace Matte
 {
     using Matte.Encoding;
     using Matte.Entropy;
-    using Matte.Entropy.Adapters;
 
     static class Module
     {
@@ -13,7 +12,7 @@ namespace Matte
         {
             builder.RegisterType<Application>();
             builder
-                .Register(c => new RandomNumberGeneratorAdapter(RandomNumberGenerator.Create()))
+                .Register(c => RandomNumberGenerator.Create().AsRandom(16))
                 .As<IRandom>();
             builder.RegisterType<SliceGeneratorFactory>();
             builder
