@@ -1,10 +1,11 @@
 using System;
 using System.Linq;
 using System.Threading;
-using Matte.Encoding.Fountain;
 
 namespace Matte
 {
+    using Matte.Encoding;
+
     class Application
     {
         readonly SliceGenerator _sliceGenerator;
@@ -22,7 +23,7 @@ namespace Matte
             Console.Write("Enter a message: ");
             var message = Console.ReadLine();
             var messageBytes = System.Text.Encoding.UTF8.GetBytes(message);
-            var sliceSize = (int)System.Math.Max(1, System.Math.Ceiling(messageBytes.Length / 10.0));
+            var sliceSize = (int)Math.Max(1, Math.Ceiling(messageBytes.Length / 10.0));
             var slices = _sliceGenerator.Generate(messageBytes, sliceSize);
             foreach (var slice in slices)
             {

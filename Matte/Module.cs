@@ -1,11 +1,12 @@
 using System.Security.Cryptography;
 using Autofac;
-using Matte.Encoding.Fountain;
-using Matte.Random;
-using Matte.Random.Adapters;
 
 namespace Matte
 {
+    using Matte.Encoding;
+    using Matte.Entropy;
+    using Matte.Entropy.Adapters;
+
     static class Module
     {
         public static void Register(ContainerBuilder builder)
