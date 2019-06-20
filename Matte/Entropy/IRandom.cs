@@ -11,7 +11,8 @@
         /// An array of random bytes
         /// </summary>
         /// <remarks>
-        /// Make sure you call <see cref="Populate"/> before extracting entropy from here
+        /// Make sure you call <see cref="Populate"/> before extracting entropy from here. Also note that this is
+        /// overwritten by <see cref="Populate"/>
         /// </remarks>
         byte[] Buffer { get; }
         

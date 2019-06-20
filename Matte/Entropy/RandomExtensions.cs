@@ -15,16 +15,23 @@
     public static class RandomExtensions
     {
         /// <summary>
+        /// Adapts this <see cref="HashAlgorithm"/> into an <see cref="IRandom"/>
+        /// </summary>
+        public static HashAlgorithmToRandomAdapter AsRandom(
+            this HashAlgorithm hashAlgorithm,
+            long seed) => new HashAlgorithmToRandomAdapter(hashAlgorithm, seed);
+        
+        /// <summary>
         /// Adapts this <see cref="Random"/> into an <see cref="IRandom"/>.
         /// </summary>
-        public static IRandom AsRandom(
+        public static RandomAdapter AsRandom(
             this Random random,
             int bufferSize) => new RandomAdapter(bufferSize, random);
 
         /// <summary>
         /// Adapts this <see cref="RandomNumberGenerator"/> into an <see cref="IRandom"/>.
         /// </summary>
-        public static IRandom AsRandom(
+        public static RandomNumberGeneratorAdapter AsRandom(
             this RandomNumberGenerator rng,
             int bufferSize) => new RandomNumberGeneratorAdapter(bufferSize, rng);
 
