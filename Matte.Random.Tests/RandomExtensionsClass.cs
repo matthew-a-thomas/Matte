@@ -1,17 +1,16 @@
-﻿namespace Matte.Random.Tests
+﻿using Xunit;
+
+namespace Matte.Random.Tests
 {
     using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Random;
 
-    [TestClass]
     public class RandomExtensionsClass
     {
-        [TestClass]
         public class ToEndlessBitSequenceMethod
         {
-            [TestMethod]
+            [Fact]
             public void InvokesRandomPopulate()
             {
                 var mocked = new Mock<IRandom>();
