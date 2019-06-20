@@ -14,22 +14,22 @@
         /// <summary>
         /// The number of booleans that are in <see cref="PackedCoefficients"/>.
         /// </summary>
-        internal int NumCoefficients { get; }
+        public int NumCoefficients { get; }
 
         /// <summary>
         /// The number of bytes that are in <see cref="PackedData"/>.
         /// </summary>
-        internal int NumData { get; }
+        public int NumData { get; }
 
         /// <summary>
         /// The coefficients in a form that allows fast bitwise XOR operations.
         /// </summary>
-        internal long[] PackedCoefficients { get; }
+        public long[] PackedCoefficients { get; }
 
         /// <summary>
         /// The data in a form that allows fast bitwise XOR operations.
         /// </summary>
-        internal long[] PackedData { get; }
+        public long[] PackedData { get; }
 
         /// <summary>
         /// Creates a new <see cref="Slice"/>.
