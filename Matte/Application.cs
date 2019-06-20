@@ -5,7 +5,9 @@ namespace Matte
 {
     using System.IO;
     using System.Reflection;
+    using System.Security.Cryptography;
     using Matte.Encoding;
+    using Newtonsoft.Json;
 
     class Application
     {
@@ -25,7 +27,7 @@ namespace Matte
             Console.InputEncoding = System.Text.Encoding.UTF8;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            var message = ConsoleHelpers.Prompt("Enter a message: ");
+            var message = ConsoleHelpers.PromptParagraph("Enter a message. Type DONE to finish: ", "DONE");
             var messageBytes = System.Text.Encoding.UTF8.GetBytes(message);
             
             Console.Write($"That produced {messageBytes.Length} bytes. ");
@@ -50,6 +52,20 @@ namespace Matte
                 GetCurrentDirectory(),
                 label);
             Directory.CreateDirectory(directory);
+
+            byte[] hash;
+            using (var sha = SHA256.Create())
+                hash = sha.ComputeHash(messageBytes);
+            File.WriteAllText(
+                Path.Combine(
+                    directory,
+                    "meta.json"),
+                JsonConvert.SerializeObject(new
+                {
+                    Label = label,
+                    Sha256 = hash,
+                    TotalBytes = messageBytes.Length
+                }, Formatting.Indented));
             
             var slices = _sliceGenerator.Generate(messageBytes, sliceSize);
             var numGenerated = 0;
@@ -84,8 +100,14 @@ namespace Matte
 
                 var fileName = Path.Join(
                     directory,
-                    $"{label}.{numGenerated}");
-                File.WriteAllText(fileName, line);
+                    $"{numGenerated}.json");
+                var fileOutput = JsonConvert.SerializeObject(new
+                {
+                    Coef = coefficients,
+                    Data = data,
+                    Hint = new string(dataAsAscii)
+                }, Formatting.Indented);
+                File.WriteAllText(fileName, fileOutput);
             }
         }
     }
