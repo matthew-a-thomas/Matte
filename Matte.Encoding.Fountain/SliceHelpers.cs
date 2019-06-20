@@ -26,7 +26,7 @@
                 packedCoefficients: coefficients.ToLongs(),
                 packedData: data.ToLongs()
             );
-        
+
         // TODO: This function creates an expensive enumerable--can we use async? or Reactive?
         /// <summary>
         /// Generates an endless sequence of <see cref="Slice"/>s, each of which is a specific combination of the
@@ -51,16 +51,16 @@
         {
             // Split up the given data into slices of the right size
             var sourceSlices = data.ToSlices(sliceSize).ToList();
-            
+
             // Grab an RNG for this sequence
             var random = rngFactoryDelegate.Invoke();
-            
+
             var result = Enumerable.Concat(
                 // Start with the source slices themselves if this is a systematic generator
                 isSystematic
                     ? sourceSlices
                     : Enumerable.Empty<Slice>(),
-                
+
                 // Then follow that up with a never-ending stream of randomly-mixed slices
                 random
                     .ToEndlessBitSequence()
@@ -69,7 +69,7 @@
                     .Select(sourceSlices.Pick)
                     .Select(x => x.Mix())
             );
-            
+
             return result;
         }
     }

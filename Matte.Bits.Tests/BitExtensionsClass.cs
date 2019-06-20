@@ -7,7 +7,7 @@
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class BitExtensionsClass
     {
-        
+
         public class BitsToLongsMethod
         {
             [Fact]
@@ -79,7 +79,7 @@
                 Assert.Equal(1, longs[1]);
             }
         }
-        
+
         public class ToBitsMethod
         {
             [Fact]
@@ -96,7 +96,7 @@
                     }),
                     string.Join(", ", bits.Select(x => x ? "1" : "0")));
             }
-            
+
             [Fact]
             public void Converts0xFFTo0b1111_1111()
             {

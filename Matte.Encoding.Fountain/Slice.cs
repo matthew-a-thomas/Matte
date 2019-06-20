@@ -56,7 +56,7 @@
             PackedCoefficients = packedCoefficients;
             PackedData = packedData;
         }
-        
+
         /// <summary>
         /// Creates an exact copy of this <see cref="Slice"/>.
         /// </summary>
@@ -67,7 +67,7 @@
                 packedCoefficients: PackedCoefficients.ToArray(),
                 packedData: PackedData.ToArray()
             );
-        
+
         /// <summary>
         /// Quickly performs a bitwise XOR into this <see cref="Slice"/>'s coefficients and data from the given
         /// <see cref="Slice"/>.

@@ -20,7 +20,7 @@
         /// The given <paramref name="packedCoefficients"/> are modified because
         /// we actually put them into reduced row echelon form in order to find
         /// the steps necessary to do so.
-        /// 
+        ///
         /// So make sure that any data associated with the given
         /// <paramref name="packedCoefficients"/> is mutated accordingly.
         /// </remarks>
@@ -88,17 +88,17 @@
             // Make sure there are at least as many rows as there are columns
             if (numRows < numCoefficients)
                 yield break;
-            
+
             // If we made it this far, then things have been solved
             yield return Complete();
         }
-        
+
         private static Step Complete() =>
             new Step(
                 @from: 0,
                 operation: Operation.Complete,
                 to: 0);
-        
+
         /// <summary>
         /// Swaps the coefficients and solutions between the two given rows
         /// </summary>

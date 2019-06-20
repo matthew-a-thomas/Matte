@@ -46,7 +46,7 @@
             int index)
         {
             const int numBitsInLong = 64;
-            
+
             var l = packed[packed.Count - index / numBitsInLong - 1];
             return ((l >> index % numBitsInLong) & 1) != 0;
         }

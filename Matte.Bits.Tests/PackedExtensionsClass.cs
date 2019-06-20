@@ -94,21 +94,21 @@
                 Assert.Equal(1, packed.GetLeastSignificantByte(8));
                 Assert.Equal(2, packed.GetLeastSignificantByte(0));
             }
-            
+
             [Fact]
             public void CorrectlyGetsFromPacked1()
             {
                 var packed = new long[] {1};
                 Assert.Equal(1, packed.GetLeastSignificantByte(0));
             }
-            
+
             [Fact]
             public void CorrectlyGetsFromPacked2()
             {
                 var packed = new long[] {2};
                 Assert.Equal(2, packed.GetLeastSignificantByte(0));
             }
-            
+
             [Fact]
             public void CorrectlyGetsFromPacked256()
             {

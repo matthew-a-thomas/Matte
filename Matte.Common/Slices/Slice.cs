@@ -12,7 +12,7 @@
         /// <see cref="Slice"/>.
         /// </summary>
         public readonly IReadOnlyList<bool> Coefficients;
-        
+
         /// <summary>
         /// This <see cref="Slice"/>'s data.
         /// </summary>

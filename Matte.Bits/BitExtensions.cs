@@ -18,7 +18,7 @@
                     yield return ((@byte << shift) & 0x80) != 0;
             }
         }
-        
+
         /// <summary>
         /// Packs these <paramref name="bits"/> into the fewest number of <see cref="long"/>s needed to store them.
         /// </summary>

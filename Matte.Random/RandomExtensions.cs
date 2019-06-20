@@ -18,13 +18,13 @@ namespace Matte.Random
         /// </summary>
         // ReSharper disable once UnusedMember.Global
         public static IRandom AsRandom(Random random) => new RandomAdapter(random);
-        
+
         /// <summary>
         /// Adapts this <see cref="RandomNumberGenerator"/> into an <see cref="IRandom"/>.
         /// </summary>
         // ReSharper disable once UnusedMember.Global
         public static IRandom AsRandom(RandomNumberGenerator rng) => new RandomNumberGeneratorAdapter(rng);
-        
+
         /// <summary>
         /// Populates the entire array with random bytes.
         /// </summary>
@@ -36,7 +36,7 @@ namespace Matte.Random
                 buffer,
                 0,
                 buffer.Length);
-        
+
         /// <summary>
         /// Produces an endless sequence of random bits from this <see cref="IRandom"/>.
         /// </summary>

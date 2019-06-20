@@ -28,12 +28,12 @@
         /// The number of bytes of data in each <see cref="Slice"/>.
         /// </summary>
         private readonly int _sliceSize;
-        
+
         /// <summary>
         /// The list of equation solutions that is used by Gaussian Elimination to solve things.
         /// </summary>
         private readonly IList<long[]> _solutionsList = new List<long[]>();
-        
+
         /// <summary>
         /// The length of the original data that was encoded into <see cref="Slice"/>s.
         /// </summary>
@@ -51,7 +51,7 @@
             _sliceSize = sliceSize;
             _totalLength = totalLength;
         }
-        
+
         /// <summary>
         /// Asynchronously records the given <see cref="Slice"/> so that it can be used for solving later on.
         /// </summary>

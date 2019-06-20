@@ -28,7 +28,7 @@
             Assert.Equal(solution[0], value1);
             Assert.Equal(solution[1], value2);
         }
-        
+
         [Fact]
         public void DoesNotSolvePrematurely()
         {
@@ -37,7 +37,7 @@
             Assert.False(solved);
             Assert.Null(solution);
         }
-        
+
         [Fact]
         public void PutsOneByteBackTogether()
         {
@@ -54,7 +54,7 @@
             Assert.Single(solution);
             Assert.Equal(solution[0], value);
         }
-        
+
         [Fact]
         public void PutsTwoSequentialSlicesBackTogether()
         {
@@ -78,7 +78,7 @@
             Assert.Equal(solution[0], value1);
             Assert.Equal(solution[1], value2);
         }
-        
+
         [Fact]
         public void WorksEvenWhenSliceSizeAndNumberOfSlicesDoNotEvenlyDivideData()
         {

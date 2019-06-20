@@ -53,14 +53,14 @@
                     new [] { false, true, false }.ToLongs()
                 };
                 var copy = coefficients.Select(x => x.Clone() as long[]).ToList();
-                
+
                 var steps = GaussianEliminationHelpers.Solve(coefficients, 3).ToList();
-                
+
                 // Assert that it has been solved
                 Assert.True(steps.Count > 0);
                 Assert.Equal(Operation.Complete, steps[steps.Count - 1].Operation);
                 AssertIsSolved(coefficients, 3);
-                
+
                 // Perform the steps on the copy
                 var mappedOperations = new Dictionary<Operation, Action<int, int, IList<long[]>>>
                 {
@@ -84,7 +84,7 @@
                         continue;
                     operation.Invoke(step.From, step.To, copy);
                 }
-                
+
                 // Assert that the copy has been solved
                 AssertIsSolved(copy, 3);
             }

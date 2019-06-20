@@ -32,7 +32,7 @@
                 {
                     var index = tuple.Index;
                     var slice = tuple.Slice;
-                    
+
                     // Verify coefficients
                     var expectedCoefficients =
                         Enumerable.Repeat(false, index)
@@ -40,14 +40,14 @@
                         .Concat(Enumerable.Repeat(false, data.Length - index - 1))
                         .ToList();
                     Assert.True(slice.GetCoefficients().SequenceEqual(expectedCoefficients));
-                    
+
                     // Verify data
                     var sliceData = slice.GetData().ToList();
                     Assert.Single(sliceData);
                     Assert.Equal(sliceData[0], data[index]);
                 }
             }
-            
+
             // TODO: This test feels like it's testing too much and making too many assumptions.
             [Fact]
             public void ProducesSolvableSequenceAfterSystematicSection()
@@ -66,7 +66,7 @@
                 var mixedSection = SliceHelpers.CreateGenerator(
                     data: data,
                     sliceSize: 2,
-                    rngFactoryDelegate: () => new RandomAdapter(new Random(0)), // Seed Random so it's deterministic 
+                    rngFactoryDelegate: () => new RandomAdapter(new Random(0)), // Seed Random so it's deterministic
                     isSystematic: true
                 ).Skip(data.Length).Take(10).ToList();
                 var solver = new SliceSolver(2, data.Length);

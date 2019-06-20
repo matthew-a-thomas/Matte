@@ -17,7 +17,7 @@
                 Assert.Equal(5, mixed.GetData().Count());
             }
         }
-        
+
         public class ToSlicesMethod
         {
             [Fact]
@@ -29,7 +29,7 @@
                 Assert.Equal(slices.Count, slices[0].GetCoefficients().Count());
                 Assert.Equal(10, slices[0].GetData().Count());
             }
-            
+
             [Fact]
             public void CreatesOnlyOneSliceWhenSliceSizeIsSameAsDataLength()
             {
@@ -39,7 +39,7 @@
                 Assert.Equal(slices.Count, slices[0].GetCoefficients().Count());
                 Assert.Equal(5, slices[0].GetData().Count());
             }
-            
+
             [Fact]
             public void CreatesTwoSlicesWhenSliceSizeIsSlightlySmallerThanDataLength()
             {

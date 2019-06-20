@@ -10,7 +10,7 @@
         {
             _valueToPopulateWith = valueToPopulateWith;
         }
-        
+
         public void Populate(
             byte[] buffer,
             int offset,

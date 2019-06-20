@@ -24,7 +24,7 @@
             slice
                 .PackedData
                 .GetBytes(slice.NumData);
-        
+
         /// <summary>
         /// XORs together the given <see cref="Slice"/>s into a new
         /// <see cref="Slice"/>.
@@ -47,7 +47,7 @@
             }
             return result;
         }
-        
+
         /// <summary>
         /// Splits the given <paramref name="data"/> up into as many <see cref="Slice"/>s as needed to have slices of
         /// size <paramref name="sliceSize"/>.
