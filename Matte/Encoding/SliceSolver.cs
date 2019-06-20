@@ -47,7 +47,7 @@
         /// <param name="totalLength">The total length of the original data.</param>
         public SliceSolver(int sliceSize, int totalLength)
         {
-            _numCoefficients = (totalLength - 1) / sliceSize + 1;
+            _numCoefficients = SliceHelpers.CalculateNumberOfSlices(totalLength, sliceSize);
             _sliceSize = sliceSize;
             _totalLength = totalLength;
         }

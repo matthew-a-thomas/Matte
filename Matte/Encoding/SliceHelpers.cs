@@ -9,6 +9,13 @@
     public static class SliceHelpers
     {
         /// <summary>
+        /// Calculates the number of slices that would be needed
+        /// </summary>
+        public static int CalculateNumberOfSlices(
+            int totalSize,
+            int sliceSize) => (totalSize - 1) / sliceSize + 1;
+        
+        /// <summary>
         /// Creates a new <see cref="Slice"/> from the given <paramref name="coefficients"/> and
         /// <paramref name="data"/>.
         /// </summary>
