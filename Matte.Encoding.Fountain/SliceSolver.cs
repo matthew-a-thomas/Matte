@@ -17,27 +17,27 @@
         /// <summary>
         /// The list of coefficients that is used by Gaussian Elimination to solve things.
         /// </summary>
-        private readonly IList<long[]> _coefficientsList = new List<long[]>();
+        readonly IList<long[]> _coefficientsList = new List<long[]>();
 
         /// <summary>
         /// The number of coefficients per <see cref="Slice"/>.
         /// </summary>
-        private readonly int _numCoefficients;
+        readonly int _numCoefficients;
 
         /// <summary>
         /// The number of bytes of data in each <see cref="Slice"/>.
         /// </summary>
-        private readonly int _sliceSize;
+        readonly int _sliceSize;
 
         /// <summary>
         /// The list of equation solutions that is used by Gaussian Elimination to solve things.
         /// </summary>
-        private readonly IList<long[]> _solutionsList = new List<long[]>();
+        readonly IList<long[]> _solutionsList = new List<long[]>();
 
         /// <summary>
         /// The length of the original data that was encoded into <see cref="Slice"/>s.
         /// </summary>
-        private readonly int _totalLength;
+        readonly int _totalLength;
 
         /// <summary>
         /// Creates a new <see cref="SliceSolver"/>, which uses <see cref="Slice"/>s to decode the original data that
@@ -65,7 +65,7 @@
         /// <summary>
         /// Swaps the two rows of the given <paramref name="solutions"/>.
         /// </summary>
-        private static void Swap(
+        static void Swap(
             int from,
             int to,
             IList<long[]> solutions)
@@ -128,7 +128,7 @@
         /// <summary>
         /// XORs the array at <paramref name="from"/> into the array at <paramref name="to"/>.
         /// </summary>
-        private static void Xor(
+        static void Xor(
             int from,
             int to,
             IList<long[]> solutions)

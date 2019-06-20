@@ -10,7 +10,7 @@
     {
         public class SolveMethod
         {
-            private static void AssertIsSolved(
+            static void AssertIsSolved(
                 IReadOnlyList<long[]> list,
                 int width)
             {

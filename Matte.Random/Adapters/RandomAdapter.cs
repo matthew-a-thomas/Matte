@@ -8,7 +8,7 @@
     /// </summary>
     public sealed class RandomAdapter : IRandom
     {
-        private readonly Random _random;
+        readonly Random _random;
 
         /// <summary>
         /// Adapts a <see cref="T:System.Random" /> into an <see cref="T:Matte.Random.IRandom" />.

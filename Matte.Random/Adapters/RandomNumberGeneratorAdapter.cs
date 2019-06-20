@@ -8,7 +8,7 @@
     /// </summary>
     public sealed class RandomNumberGeneratorAdapter : IRandom
     {
-        private readonly RandomNumberGenerator _rng;
+        readonly RandomNumberGenerator _rng;
 
         /// <summary>
         /// Adapts a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> into an <see cref="T:Matte.Random.IRandom" />.

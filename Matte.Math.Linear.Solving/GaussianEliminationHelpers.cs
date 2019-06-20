@@ -93,7 +93,7 @@
             yield return Complete();
         }
 
-        private static Step Complete() =>
+        static Step Complete() =>
             new Step(
                 @from: 0,
                 operation: Operation.Complete,
@@ -102,7 +102,7 @@
         /// <summary>
         /// Swaps the coefficients and solutions between the two given rows
         /// </summary>
-        private static Step SwapRows(
+        static Step SwapRows(
             IList<long[]> list,
             int fromRow,
             int toRow)
@@ -119,7 +119,7 @@
         /// <summary>
         /// XOR's the row at <paramref name="fromRow"/> into the row at <paramref name="toRow"/>, for both the coefficients and the solutions
         /// </summary>
-        private static Step XorRows(
+        static Step XorRows(
             IList<long[]> list,
             int fromRow,
             int toRow)

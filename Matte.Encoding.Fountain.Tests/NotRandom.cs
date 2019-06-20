@@ -2,9 +2,9 @@
 {
     using Random;
 
-    internal sealed class NotRandom : IRandom
+    sealed class NotRandom : IRandom
     {
-        private readonly byte _valueToPopulateWith;
+        readonly byte _valueToPopulateWith;
 
         public NotRandom(byte valueToPopulateWith)
         {
