@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte", "Matte\Matte.csproj", "{19E974CB-541C-4F79-9774-AA7C9DCFA1C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Tests", "Matte.Tests\Matte.Tests.csproj", "{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Bits", "Matte.Bits\Matte.Bits.csproj", "{FA98AD19-3704-41DE-A9D9-51D57175901A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matte.Bits.Tests", "Matte.Bits.Tests\Matte.Bits.Tests.csproj", "{407F9386-D0CC-468F-B4C5-19723972B4C3}"
@@ -41,10 +39,6 @@ Global
 		{19E974CB-541C-4F79-9774-AA7C9DCFA1C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19E974CB-541C-4F79-9774-AA7C9DCFA1C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19E974CB-541C-4F79-9774-AA7C9DCFA1C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32A4A36A-B6AF-4904-9CDA-0F16DAB9A28F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FA98AD19-3704-41DE-A9D9-51D57175901A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA98AD19-3704-41DE-A9D9-51D57175901A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA98AD19-3704-41DE-A9D9-51D57175901A}.Release|Any CPU.ActiveCfg = Release|Any CPU
