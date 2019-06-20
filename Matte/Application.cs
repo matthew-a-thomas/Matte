@@ -16,6 +16,9 @@ namespace Matte
 
         public void Run()
         {
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             Console.Write("Enter a message: ");
             var message = Console.ReadLine();
             var messageBytes = System.Text.Encoding.UTF8.GetBytes(message);
@@ -36,9 +39,11 @@ namespace Matte
                 var dataAsAscii = new char[data.Length];
                 for (var i = 0; i < data.Length; ++i)
                 {
-                    dataAsAscii[i] = (char) data[i];
-                    if (char.IsControl(dataAsAscii[i]))
-                        dataAsAscii[i] = '?';
+                    var b = data[i];
+                    var c = (char) b;
+                    dataAsAscii[i] = char.IsControl(c) || char.IsSurrogate(c)
+                        ? '□'
+                        : c;
                 }
                 Console.Write(coefficients);
                 Console.Write(" -> ");
