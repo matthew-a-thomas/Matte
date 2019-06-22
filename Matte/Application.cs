@@ -24,25 +24,29 @@ namespace Matte
 
         public void Run()
         {
+            Console.SetIn(new StreamReader(Console.OpenStandardInput(1 >> 14)));
             Console.InputEncoding = System.Text.Encoding.UTF8;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            switch (ConsoleHelpers.Choose(
-                null,
-                new[]
-                {
-                    "Record slices",
-                    "Decode slices"
-                }))
+            while (true)
             {
-                case 0:
-                    RecordSlices();
-                    break;
-                case 1:
-                    DecodeSlices();
-                    break;
-                default:
-                    throw new NotImplementedException();
+                switch (ConsoleHelpers.Choose(
+                    null,
+                    new[]
+                    {
+                        "Record slices",
+                        "Decode slices"
+                    }))
+                {
+                    case 0:
+                        RecordSlices();
+                        break;
+                    case 1:
+                        DecodeSlices();
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
             }
         }
 
